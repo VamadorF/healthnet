@@ -1,0 +1,22 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  },
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase-url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase-anon-key",
+    "SUPABASE_SERVICE_ROLE_KEY": "@supabase-service-role-key",
+    "NEXT_PUBLIC_SENTRY_DSN": "@sentry-dsn",
+    "SENTRY_ORG": "@sentry-org",
+    "SENTRY_PROJECT": "@sentry-project",
+    "SENTRY_AUTH_TOKEN": "@sentry-auth-token",
+    "RESEND_API_KEY": "@resend-api-key",
+    "RESEND_FROM_EMAIL": "@resend-from-email"
+  }
+}

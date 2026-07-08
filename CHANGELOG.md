@@ -156,6 +156,18 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
+### Añadido
+- Página de registro (`/signup`) con validación Zod
+- Recuperación de contraseña (`/forgot-password`)
+- Restablecimiento de contraseña (`/reset-password`)
+- Página de perfil editable (`/profile`) con server actions
+- Upload de avatar a Supabase Storage privado
+- Navegación compartida (`AppNav`) para páginas autenticadas
+- Componente `AuthCard` para páginas de autenticación
+- Rutas públicas centralizadas en `public-routes.ts`
+- Enlaces entre login, registro y recuperación de contraseña
+- Landing page con CTAs de registro e inicio de sesión
+
 ### Por Hacer
 - [ ] Agregar tests unitarios (Jest/Vitest)
 - [ ] Agregar tests E2E (Playwright)

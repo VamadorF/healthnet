@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export function LoginForm() {
   const [email, setEmail] = useState('');
@@ -51,38 +54,33 @@ export function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-      <div className="space-y-4 rounded-md shadow-sm">
-        <div>
-          <label htmlFor="email" className="sr-only">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="relative block w-full rounded-t-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:bg-gray-800 dark:text-white dark:ring-gray-700"
-            placeholder="Email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password" className="sr-only">
-            Contraseña
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="relative block w-full rounded-b-md border-0 py-2 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:bg-gray-800 dark:text-white dark:ring-gray-700"
-            placeholder="Contraseña"
-          />
-        </div>
+    <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+      <Input
+        id="email"
+        label="Email"
+        type="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="tu@email.com"
+      />
+      <Input
+        id="password"
+        label="Contraseña"
+        type="password"
+        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Tu contraseña"
+      />
+
+      <div className="text-right">
+        <Link
+          href="/forgot-password"
+          className="text-sm font-medium text-blue-600 hover:text-blue-500"
+        >
+          ¿Olvidaste tu contraseña?
+        </Link>
       </div>
 
       {error && (
@@ -91,34 +89,22 @@ export function LoginForm() {
         </div>
       )}
 
-      <div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="group relative flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50"
-        >
-          {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
-        </button>
-      </div>
+      <Button type="submit" disabled={loading} className="w-full">
+        {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+      </Button>
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-300 dark:border-gray-700" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="bg-white dark:bg-gray-900 px-2 text-gray-500">O continuar con</span>
+          <span className="bg-gray-50 px-2 text-gray-500 dark:bg-gray-900">O continuar con</span>
         </div>
       </div>
 
-      <div>
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          className="group relative flex w-full justify-center rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
-        >
-          Iniciar sesión con Google
-        </button>
-      </div>
+      <Button type="button" variant="secondary" onClick={handleGoogleLogin} className="w-full">
+        Iniciar sesión con Google
+      </Button>
     </form>
   );
 }

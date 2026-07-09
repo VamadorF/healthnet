@@ -156,6 +156,16 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
+### Añadido
+- Arquitectura RBAC con 4 roles: Administrador, Organización, Especialista y Paciente
+- Prisma ORM con modelos clínicos (citas, consultas, síntomas, invitaciones)
+- Dashboards dedicados por rol con navegación y permisos escalonados
+- Server actions para flujos operativos de cada actor
+- Sincronización Supabase Auth → Prisma User
+- Seed de datos demo por rol
+- Configuración de despliegue en Render (`render.yaml`)
+- Documentación de plataforma (`PLATFORM.md`)
+
 ### Cambiado
 - Renombrar la aplicación de HealthNet a **HealthCloud** en toda la UI, emails, documentación y configuración
 

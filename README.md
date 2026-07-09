@@ -256,8 +256,7 @@ healthcloud/
 │       ├── prisma.ts       # Cliente Prisma
 │       └── supabase/       # Cliente Supabase
 ├── supabase/migrations/    # SQL para perfiles y storage
-├── render.yaml             # Blueprint de despliegue
-└── PLATFORM.md             # Documentación de arquitectura
+└── render.yaml             # Blueprint de despliegue
 ```
 
 ---
@@ -293,14 +292,9 @@ PORT=3001 npm run dev
 
 ---
 
-## Documentación adicional
+## Historial de cambios
 
-| Archivo | Contenido |
-|---------|-----------|
-| [PLATFORM.md](./PLATFORM.md) | Arquitectura, roles y modelos |
-| [SETUP.md](./SETUP.md) | Configuración detallada de servicios |
-| [QUICK_START.md](./QUICK_START.md) | Inicio rápido en 5 minutos |
-| [CHANGELOG.md](./CHANGELOG.md) | Historial de cambios |
+Ver [CHANGELOG.md](./CHANGELOG.md).
 
 ---
 

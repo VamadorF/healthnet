@@ -70,17 +70,17 @@ export function ResetPasswordForm() {
       />
 
       {error && (
-        <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4">
-          <p className="text-sm text-red-800 dark:text-red-300">{error}</p>
+        <div className="rounded-md bg-danger-soft p-4">
+          <p className="text-sm text-danger">{error}</p>
         </div>
       )}
 
-      <Button type="submit" disabled={loading} className="w-full">
+      <Button type="submit" loading={loading} className="w-full">
         {loading ? 'Actualizando...' : 'Actualizar contraseña'}
       </Button>
 
       <p className="text-center text-sm">
-        <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500">
+        <Link href="/login" className="font-medium text-brand hover:text-brand-dark">
           Volver a iniciar sesión
         </Link>
       </p>

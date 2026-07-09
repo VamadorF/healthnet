@@ -47,7 +47,18 @@ body {
   }
   /* Eyebrow / metadata label — the muted, tracked, small tier. */
   .eyebrow {
-    @apply text-[11px] font-medium uppercase tracking-[0.12em] text-inkFaint;
+    @apply text-2xs font-medium uppercase tracking-[0.12em] text-inkFaint;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

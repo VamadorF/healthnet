@@ -4,7 +4,7 @@ const CONSULTATIONS = [
   {
     patient: 'Roberto Díaz',
     date: 'Hoy, 09:45',
-    diagnosis: 'Diabetes tipo 2 — control trimestral',
+    diagnosis: 'Diabetes tipo 2 · control trimestral',
     notes: 'HbA1c 6.8%. Mantener metformina 850mg. Reforzar plan alimentario.',
     vitals: 'PA 128/82 · FC 72',
   },

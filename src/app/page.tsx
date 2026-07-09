@@ -20,7 +20,7 @@ export default function Home() {
       {/* Nav */}
       <header className="sticky top-0 z-20 border-b border-line bg-canvas/85 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
-          <span className="flex items-center gap-2 text-[15px] font-semibold tracking-tight">
+          <span className="flex items-center gap-2 text-base font-semibold tracking-tight">
             <span className="h-4 w-1.5 rounded-full bg-brand" />
             HealthCloud
           </span>
@@ -115,7 +115,7 @@ export default function Home() {
               >
                 <span className={`h-10 w-1 rounded-full ${card.rail}`} />
                 <div className="flex-1">
-                  <h3 className="text-[15px] font-semibold text-ink">{card.title}</h3>
+                  <h3 className="text-base font-semibold text-ink">{card.title}</h3>
                   <p className="mt-0.5 text-sm text-inkMuted">{card.sub}</p>
                 </div>
                 <span className="text-inkFaint transition-transform group-hover:translate-x-0.5 group-hover:text-brand" aria-hidden>

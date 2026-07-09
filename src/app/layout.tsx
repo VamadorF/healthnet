@@ -15,7 +15,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'HealthCloud — Gestión de servicios de salud',
+  title: 'HealthCloud · Gestión de servicios de salud',
   description: 'Plataforma que conecta organizaciones médicas, especialistas y pacientes',
 };
 

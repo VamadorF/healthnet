@@ -25,9 +25,9 @@ export default async function AdminDashboardPage() {
         <StatCard label="Reportes generados" value={reports.length} />
       </div>
 
-      <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+      <div className="mt-8 rounded-lg border border-line bg-surface p-6">
         <h2 className="text-lg font-semibold">Responsabilidades del Administrador</h2>
-        <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-600 dark:text-gray-400">
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-inkMuted">
           <li>Invitar o bloquear organizaciones médicas</li>
           <li>Visualizar reportes generales de uso de la plataforma</li>
           <li>Gestionar invitaciones institucionales</li>

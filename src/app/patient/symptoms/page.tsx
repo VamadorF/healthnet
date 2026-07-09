@@ -22,7 +22,7 @@ export default async function PatientSymptomsPage() {
     >
       <form
         action={reportSymptoms}
-        className="mb-8 grid max-w-2xl gap-4 rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
+        className="mb-8 grid max-w-2xl gap-4 rounded-lg border border-line bg-surface p-6"
       >
         <div>
           <label htmlFor="description" className="mb-2 block text-sm font-medium">Descripción</label>
@@ -31,7 +31,7 @@ export default async function PatientSymptomsPage() {
             name="description"
             required
             rows={4}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800"
+            className="w-full rounded-md border border-line px-3 py-2 text-sm"
             placeholder="Describe tus síntomas..."
           />
         </div>
@@ -40,7 +40,7 @@ export default async function PatientSymptomsPage() {
           <select
             id="urgencyLevel"
             name="urgencyLevel"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800"
+            className="w-full rounded-md border border-line px-3 py-2 text-sm"
           >
             <option value="LOW">Baja</option>
             <option value="MEDIUM">Media</option>
@@ -71,21 +71,21 @@ export default async function PatientSymptomsPage() {
         {reports.map((report) => (
           <div
             key={report.id}
-            className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
+            className="rounded-lg border border-line bg-surface p-4"
           >
             <div className="flex items-center gap-2">
               <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                report.isEmergency ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'
+                report.isEmergency ? 'bg-danger-soft text-danger' : 'bg-surfaceMuted text-ink'
               }`}>
                 {report.urgencyLevel}
               </span>
-              <span className="text-xs text-gray-400">{formatDateTime(report.createdAt)}</span>
+              <span className="text-xs text-inkFaint">{formatDateTime(report.createdAt)}</span>
             </div>
             <p className="mt-2 text-sm">{report.description}</p>
           </div>
         ))}
         {reports.length === 0 && (
-          <p className="text-gray-500">No has registrado síntomas aún.</p>
+          <p className="text-inkMuted">No has registrado síntomas aún.</p>
         )}
       </div>
     </PlatformShell>

@@ -28,7 +28,7 @@ export default async function PatientAppointmentsPage() {
     >
       <form
         action={requestAppointment}
-        className="mb-8 grid max-w-2xl gap-4 rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
+        className="mb-8 grid max-w-2xl gap-4 rounded-lg border border-line bg-surface p-6"
       >
         <Input name="scheduledAt" label="Fecha y hora" type="datetime-local" required />
         <Input name="reason" label="Motivo de consulta" required placeholder="Control rutinario" />
@@ -39,7 +39,7 @@ export default async function PatientAppointmentsPage() {
           <select
             id="organizationId"
             name="organizationId"
-            className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800"
+            className="w-full rounded-md border border-line bg-surface px-3 py-2 text-sm"
           >
             <option value="">Sin preferencia</option>
             {organizations.map((org) => (
@@ -55,15 +55,15 @@ export default async function PatientAppointmentsPage() {
         {appointments.map((appt) => (
           <div
             key={appt.id}
-            className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
+            className="rounded-lg border border-line bg-surface p-4"
           >
             <p className="font-medium">{formatDateTime(appt.scheduledAt)}</p>
-            <p className="text-sm text-gray-500">{appt.reason}</p>
-            <span className="text-xs text-blue-600">{appt.status}</span>
+            <p className="text-sm text-inkMuted">{appt.reason}</p>
+            <span className="text-xs text-brand">{appt.status}</span>
           </div>
         ))}
         {appointments.length === 0 && (
-          <p className="text-gray-500">No has solicitado citas aún.</p>
+          <p className="text-inkMuted">No has solicitado citas aún.</p>
         )}
       </div>
     </PlatformShell>

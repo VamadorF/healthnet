@@ -28,15 +28,15 @@ export default async function SpecialistConsultationsPage() {
         {appointments.map((appt) => (
           <div
             key={appt.id}
-            className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
+            className="rounded-lg border border-line bg-surface p-6"
           >
             <div className="mb-4">
               <h3 className="font-semibold">{appt.patient.fullName ?? appt.patient.email}</h3>
-              <p className="text-sm text-gray-500">{formatDateTime(appt.scheduledAt)} · {appt.status}</p>
+              <p className="text-sm text-inkMuted">{formatDateTime(appt.scheduledAt)} · {appt.status}</p>
             </div>
 
             {appt.consultation ? (
-              <div className="rounded-md bg-gray-50 p-4 text-sm dark:bg-gray-900">
+              <div className="rounded-md bg-canvas p-4 text-sm">
                 <p><strong>Diagnóstico:</strong> {appt.consultation.diagnosis}</p>
                 <p className="mt-2"><strong>Notas:</strong> {(appt.consultation.clinicalData as { notes?: string })?.notes}</p>
               </div>
@@ -63,7 +63,7 @@ export default async function SpecialistConsultationsPage() {
           </div>
         ))}
         {appointments.length === 0 && (
-          <p className="text-center text-gray-500">No hay consultas para registrar.</p>
+          <p className="text-center text-inkMuted">No hay consultas para registrar.</p>
         )}
       </div>
     </PlatformShell>

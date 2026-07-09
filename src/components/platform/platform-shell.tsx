@@ -22,7 +22,7 @@ export function PlatformNav({ user }: PlatformNavProps) {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <Link
             href={navItems[0]?.href ?? '/'}
-            className="flex items-center gap-2 text-[15px] font-semibold tracking-tight text-ink"
+            className="flex items-center gap-2 text-base font-semibold tracking-tight text-ink"
           >
             <span className={`h-4 w-1.5 rounded-full ${ROLE_ACCENT[user.role]}`} />
             HealthCloud
@@ -75,7 +75,7 @@ export function PlatformShell({ user, title, description, children }: PlatformSh
       <PlatformNav user={user} />
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-[28px] font-semibold tracking-tightest text-ink">{title}</h1>
+          <h1 className="text-3xl font-semibold tracking-tightest text-ink">{title}</h1>
           {description && <p className="mt-1.5 max-w-2xl text-inkMuted">{description}</p>}
         </div>
         {children}
@@ -94,7 +94,7 @@ export function StatCard({ label, value, hint }: StatCardProps) {
   return (
     <div className="rounded-xl border border-line bg-surface p-5 shadow-card">
       <p className="eyebrow">{label}</p>
-      <p className="mt-3 text-[28px] font-semibold leading-none tracking-tightest text-ink tabular">{value}</p>
+      <p className="mt-3 text-3xl font-semibold leading-none tracking-tightest text-ink tabular">{value}</p>
       {hint && <p className="mt-2.5 text-xs font-medium text-inkMuted">{hint}</p>}
     </div>
   );

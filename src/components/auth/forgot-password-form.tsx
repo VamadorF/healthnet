@@ -43,11 +43,11 @@ export function ForgotPasswordForm() {
 
   if (success) {
     return (
-      <div className="rounded-md bg-green-50 dark:bg-green-900/20 p-4 text-center">
-        <p className="text-sm text-green-800 dark:text-green-300">
+      <div className="rounded-md bg-success-soft p-4 text-center">
+        <p className="text-sm text-success">
           Si el correo existe en nuestro sistema, recibirás un enlace para restablecer tu contraseña.
         </p>
-        <Link href="/login" className="mt-4 inline-block text-sm font-medium text-blue-600">
+        <Link href="/login" className="mt-4 inline-block text-sm font-medium text-brand">
           Volver a iniciar sesión
         </Link>
       </div>
@@ -67,17 +67,17 @@ export function ForgotPasswordForm() {
       />
 
       {error && (
-        <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4">
-          <p className="text-sm text-red-800 dark:text-red-300">{error}</p>
+        <div className="rounded-md bg-danger-soft p-4">
+          <p className="text-sm text-danger">{error}</p>
         </div>
       )}
 
-      <Button type="submit" disabled={loading} className="w-full">
+      <Button type="submit" loading={loading} className="w-full">
         {loading ? 'Enviando...' : 'Enviar enlace de recuperación'}
       </Button>
 
       <p className="text-center text-sm">
-        <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500">
+        <Link href="/login" className="font-medium text-brand hover:text-brand-dark">
           Volver a iniciar sesión
         </Link>
       </p>

@@ -26,23 +26,23 @@ export default async function PatientHistoryPage() {
         {appointments.map((appt) => (
           <div
             key={appt.id}
-            className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
+            className="rounded-lg border border-line bg-surface p-6"
           >
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="font-semibold">{formatDateTime(appt.scheduledAt)}</h3>
-              <span className="text-xs text-blue-600">{appt.status}</span>
+              <span className="text-xs text-brand">{appt.status}</span>
             </div>
-            <p className="mt-1 text-sm text-gray-500">{appt.reason}</p>
+            <p className="mt-1 text-sm text-inkMuted">{appt.reason}</p>
             {appt.organization && (
-              <p className="text-sm text-gray-400">Centro: {appt.organization.name}</p>
+              <p className="text-sm text-inkFaint">Centro: {appt.organization.name}</p>
             )}
             {appt.specialist && (
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-inkFaint">
                 Especialista: {appt.specialist.fullName ?? appt.specialist.email}
               </p>
             )}
             {appt.consultation && (
-              <div className="mt-4 rounded-md bg-gray-50 p-4 text-sm dark:bg-gray-900">
+              <div className="mt-4 rounded-md bg-canvas p-4 text-sm">
                 <p><strong>Diagnóstico:</strong> {appt.consultation.diagnosis}</p>
                 <p className="mt-1">
                   <strong>Tratamiento:</strong>{' '}
@@ -53,7 +53,7 @@ export default async function PatientHistoryPage() {
           </div>
         ))}
         {appointments.length === 0 && (
-          <p className="text-center text-gray-500">Tu historial médico aparecerá aquí tras tus primeras atenciones.</p>
+          <p className="text-center text-inkMuted">Tu historial médico aparecerá aquí tras tus primeras atenciones.</p>
         )}
       </div>
     </PlatformShell>

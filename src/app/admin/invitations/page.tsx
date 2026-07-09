@@ -21,23 +21,23 @@ export default async function AdminInvitationsPage() {
         {invitations.map((inv) => (
           <div
             key={inv.id}
-            className="rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800"
+            className="rounded-lg border border-line bg-surface p-5"
           >
             <div className="flex flex-wrap items-center gap-2">
               <p className="font-medium">{inv.email}</p>
               <RoleBadge role={inv.role} />
-              <span className="text-xs text-gray-400">{inv.status}</span>
+              <span className="text-xs text-inkFaint">{inv.status}</span>
             </div>
             {inv.organizationName && (
-              <p className="mt-1 text-sm text-gray-500">Organización: {inv.organizationName}</p>
+              <p className="mt-1 text-sm text-inkMuted">Organización: {inv.organizationName}</p>
             )}
-            <p className="mt-1 text-xs text-gray-400">
+            <p className="mt-1 text-xs text-inkFaint">
               Enviada el {formatDate(inv.createdAt)} · Expira {formatDate(inv.expiresAt)}
             </p>
           </div>
         ))}
         {invitations.length === 0 && (
-          <p className="text-center text-gray-500">No hay invitaciones registradas.</p>
+          <p className="text-center text-inkMuted">No hay invitaciones registradas.</p>
         )}
       </div>
     </PlatformShell>

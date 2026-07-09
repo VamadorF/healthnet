@@ -36,7 +36,7 @@ export function DemoShell({ role, title, subtitle, children }: DemoShellProps) {
         <aside className="hidden w-[248px] flex-shrink-0 flex-col border-r border-line bg-canvas lg:flex">
           <div className="flex items-center gap-2.5 px-5 py-5">
             <span className={`h-5 w-1.5 rounded-full ${accent.bg}`} />
-            <Link href="/" className="text-[15px] font-semibold tracking-tight text-ink">
+            <Link href="/" className="text-base font-semibold tracking-tight text-ink">
               HealthCloud
             </Link>
           </div>
@@ -94,7 +94,7 @@ export function DemoShell({ role, title, subtitle, children }: DemoShellProps) {
                   <span className={`h-1.5 w-1.5 rounded-full ${accent.bg}`} />
                   <span className="eyebrow">{accent.label}</span>
                 </div>
-                <h1 className="mt-1.5 text-[26px] font-semibold leading-tight tracking-tightest text-ink md:text-[28px]">
+                <h1 className="mt-1.5 text-3xl font-semibold tracking-tightest text-ink">
                   {title}
                 </h1>
                 {subtitle && <p className="mt-1 max-w-2xl text-sm text-inkMuted">{subtitle}</p>}
@@ -150,7 +150,7 @@ export function MetricGrid({ items }: { items: { label: string; value: string; d
       {items.map((item) => (
         <div key={item.label} className="rounded-xl border border-line bg-surface p-5 shadow-card">
           <p className="eyebrow">{item.label}</p>
-          <p className="mt-3 text-[28px] font-semibold leading-none tracking-tightest text-ink tabular">
+          <p className="mt-3 text-3xl font-semibold leading-none tracking-tightest text-ink tabular">
             {item.value}
           </p>
           {item.delta && <p className="mt-2.5 text-xs font-medium text-inkMuted">{item.delta}</p>}
@@ -172,7 +172,7 @@ export function Panel({
   return (
     <section className="overflow-hidden rounded-xl border border-line bg-surface shadow-card">
       <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-3.5">
-        <h2 className="text-[15px] font-semibold text-ink">{title}</h2>
+        <h2 className="text-base font-semibold text-ink">{title}</h2>
         {action}
       </div>
       <div className="p-5">{children}</div>

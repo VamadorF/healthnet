@@ -38,13 +38,13 @@ export default async function SpecialistDashboardPage() {
         {appointments.map((appt) => (
           <div
             key={appt.id}
-            className="flex flex-col gap-3 rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800 sm:flex-row sm:items-center sm:justify-between"
+            className="flex flex-col gap-3 rounded-lg border border-line bg-surface p-5 sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
               <p className="font-medium">{appt.patient.fullName ?? appt.patient.email}</p>
-              <p className="text-sm text-gray-500">{formatDateTime(appt.scheduledAt)}</p>
-              <p className="text-sm text-gray-400">{appt.reason}</p>
-              <span className="mt-1 inline-block text-xs text-blue-600">{appt.status}</span>
+              <p className="text-sm text-inkMuted">{formatDateTime(appt.scheduledAt)}</p>
+              <p className="text-sm text-inkFaint">{appt.reason}</p>
+              <span className="mt-1 inline-block text-xs text-brand">{appt.status}</span>
             </div>
             {appt.status === 'REQUESTED' && (
               <form action={confirmAppointment}>
@@ -55,7 +55,7 @@ export default async function SpecialistDashboardPage() {
           </div>
         ))}
         {appointments.length === 0 && (
-          <p className="text-center text-gray-500">No tienes citas programadas.</p>
+          <p className="text-center text-inkMuted">No tienes citas programadas.</p>
         )}
       </div>
     </PlatformShell>

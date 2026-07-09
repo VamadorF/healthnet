@@ -66,7 +66,7 @@ export function ArchitectureMap() {
         {ARCHITECTURE_LAYERS.map((layer, i) => (
           <div key={layer.title} className="rounded-xl border border-line bg-surface p-5 shadow-card">
             <div className="flex items-center gap-2">
-              <span className="flex h-5 w-5 items-center justify-center rounded-md bg-surfaceMuted font-mono text-[11px] font-medium text-inkMuted tabular">
+              <span className="flex h-5 w-5 items-center justify-center rounded-md bg-surfaceMuted font-mono text-2xs font-medium text-inkMuted tabular">
                 {i + 1}
               </span>
               <h4 className="text-sm font-semibold text-ink">{layer.title}</h4>

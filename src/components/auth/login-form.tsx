@@ -77,28 +77,28 @@ export function LoginForm() {
       <div className="text-right">
         <Link
           href="/forgot-password"
-          className="text-sm font-medium text-blue-600 hover:text-blue-500"
+          className="text-sm font-medium text-brand hover:text-brand-dark"
         >
           ¿Olvidaste tu contraseña?
         </Link>
       </div>
 
       {error && (
-        <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4">
-          <p className="text-sm text-red-800 dark:text-red-300">{error}</p>
+        <div className="rounded-md bg-danger-soft p-4">
+          <p className="text-sm text-danger">{error}</p>
         </div>
       )}
 
-      <Button type="submit" disabled={loading} className="w-full">
+      <Button type="submit" loading={loading} className="w-full">
         {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
       </Button>
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300 dark:border-gray-700" />
+          <div className="w-full border-t border-line" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="bg-gray-50 px-2 text-gray-500 dark:bg-gray-900">O continuar con</span>
+          <span className="bg-canvas px-2 text-inkMuted">O continuar con</span>
         </div>
       </div>
 

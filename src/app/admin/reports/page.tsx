@@ -33,9 +33,9 @@ export default async function AdminReportsPage() {
         </div>
       )}
 
-      <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
+      <div className="overflow-x-auto rounded-lg border border-line bg-surface">
         <table className="min-w-full text-left text-sm">
-          <thead className="border-b border-gray-200 dark:border-gray-700">
+          <thead className="border-b border-line">
             <tr>
               <th className="px-4 py-3">Fecha</th>
               <th className="px-4 py-3">Usuarios</th>
@@ -47,7 +47,7 @@ export default async function AdminReportsPage() {
           </thead>
           <tbody>
             {metrics.map((m) => (
-              <tr key={m.id} className="border-b border-gray-100 dark:border-gray-700">
+              <tr key={m.id} className="border-b border-line">
                 <td className="px-4 py-3">{formatDate(m.date)}</td>
                 <td className="px-4 py-3">{m.totalUsers}</td>
                 <td className="px-4 py-3">{m.activeUsers}</td>
@@ -59,7 +59,7 @@ export default async function AdminReportsPage() {
           </tbody>
         </table>
         {metrics.length === 0 && (
-          <p className="p-6 text-center text-gray-500">Genera el primer reporte para ver métricas.</p>
+          <p className="p-6 text-center text-inkMuted">Genera el primer reporte para ver métricas.</p>
         )}
       </div>
     </PlatformShell>

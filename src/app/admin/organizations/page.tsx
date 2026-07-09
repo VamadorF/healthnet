@@ -19,7 +19,7 @@ export default async function AdminOrganizationsPage() {
       title="Organizaciones"
       description="Invita, supervisa y bloquea clínicas o centros médicos"
     >
-      <form action={inviteOrganization} className="mb-8 grid gap-4 rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800 sm:grid-cols-3">
+      <form action={inviteOrganization} className="mb-8 grid gap-4 rounded-lg border border-line bg-surface p-6 sm:grid-cols-3">
         <Input name="email" label="Email del responsable" type="email" required placeholder="clinica@email.com" />
         <Input name="organizationName" label="Nombre de la organización" required placeholder="Clínica Central" />
         <div className="flex items-end">
@@ -31,21 +31,21 @@ export default async function AdminOrganizationsPage() {
         {organizations.map((org) => (
           <div
             key={org.id}
-            className="flex flex-col gap-4 rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800 sm:flex-row sm:items-center sm:justify-between"
+            className="flex flex-col gap-4 rounded-lg border border-line bg-surface p-5 sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-semibold">{org.name}</h3>
                 <span className={`rounded-full px-2 py-0.5 text-xs ${
-                  org.status === 'ACTIVE' ? 'bg-green-100 text-green-800' :
-                  org.status === 'BLOCKED' ? 'bg-red-100 text-red-800' :
+                  org.status === 'ACTIVE' ? 'bg-success-soft text-success' :
+                  org.status === 'BLOCKED' ? 'bg-danger-soft text-danger' :
                   'bg-yellow-100 text-yellow-800'
                 }`}>
                   {org.status}
                 </span>
               </div>
-              <p className="mt-1 text-sm text-gray-500">{org.owner.email}</p>
-              <p className="text-sm text-gray-400">{org.specialists.length} especialistas vinculados</p>
+              <p className="mt-1 text-sm text-inkMuted">{org.owner.email}</p>
+              <p className="text-sm text-inkFaint">{org.specialists.length} especialistas vinculados</p>
             </div>
             <form action={toggleOrganizationStatus}>
               <input type="hidden" name="organizationId" value={org.id} />
@@ -57,7 +57,7 @@ export default async function AdminOrganizationsPage() {
           </div>
         ))}
         {organizations.length === 0 && (
-          <p className="text-center text-gray-500">No hay organizaciones registradas aún.</p>
+          <p className="text-center text-inkMuted">No hay organizaciones registradas aún.</p>
         )}
       </div>
     </PlatformShell>

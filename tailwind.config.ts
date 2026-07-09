@@ -57,16 +57,36 @@ const config: Config = {
         display: ['var(--font-plex-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-plex-mono)', 'ui-monospace', 'monospace'],
       },
+      // One fixed type scale (~1.2 ratio, 14px base) with line-heights
+      // baked in. No arbitrary sizes anywhere in the app.
+      fontSize: {
+        '2xs': ['11px', { lineHeight: '1.45' }],
+        xs: ['12px', { lineHeight: '1.5' }],
+        sm: ['14px', { lineHeight: '1.55' }],
+        base: ['15px', { lineHeight: '1.55' }],
+        lg: ['17px', { lineHeight: '1.5' }],
+        xl: ['20px', { lineHeight: '1.35' }],
+        '2xl': ['24px', { lineHeight: '1.25' }],
+        '3xl': ['28px', { lineHeight: '1.18' }],
+        '4xl': ['34px', { lineHeight: '1.1' }],
+        '5xl': ['44px', { lineHeight: '1.04' }],
+      },
+      // Exactly three radii in play: 8px controls, 12px containers, full.
       borderRadius: {
         none: '0',
-        sm: '6px',
+        sm: '8px',
         DEFAULT: '8px',
         md: '8px',
-        lg: '10px',
-        xl: '14px',
-        '2xl': '18px',
-        '3xl': '24px',
+        lg: '8px',
+        xl: '12px',
+        '2xl': '12px',
+        '3xl': '12px',
         full: '9999px',
+      },
+      transitionTimingFunction: {
+        // Custom ease-out — built-in curves are too weak. Applied to
+        // every `transition-*` utility by overriding the default.
+        DEFAULT: 'cubic-bezier(0.23, 1, 0.32, 1)',
       },
       boxShadow: {
         xs: '0 0 0 1px rgba(19,38,42,0.04)',

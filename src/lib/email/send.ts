@@ -1,10 +1,10 @@
-import { resend, FROM_EMAIL } from '@/lib/resend';
+import { getResend, FROM_EMAIL } from '@/lib/resend';
 import { WelcomeEmail } from './templates/welcome';
 import { captureException } from '@/lib/sentry';
 
 export async function sendWelcomeEmail(to: string, userName: string) {
   try {
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: FROM_EMAIL,
       to,
       subject: '¡Bienvenido a HealthCloud!',
@@ -25,7 +25,7 @@ export async function sendWelcomeEmail(to: string, userName: string) {
 
 export async function sendPasswordResetEmail(to: string, resetLink: string) {
   try {
-    const { data, error } = await resend.emails.send({
+    const { data, error } = await getResend().emails.send({
       from: FROM_EMAIL,
       to,
       subject: 'Restablecer tu contraseña',

@@ -49,6 +49,41 @@ Las rutas `/demo/*` son interfaces estáticas con datos realistas. Las rutas `/a
 
 ---
 
+## Desplegar el mock en Vercel
+
+El mock está listo para Vercel **sin configurar Supabase ni base de datos**.
+
+### Pasos
+
+1. Conecta el repositorio en [vercel.com](https://vercel.com) → **Add New Project**
+2. Vercel detecta Next.js automáticamente (no necesitas variables de entorno)
+3. Haz deploy
+
+### URLs que funcionan sin configuración
+
+| Página | URL en producción |
+|--------|-------------------|
+| Landing | `https://tu-proyecto.vercel.app/` |
+| Admin | `https://tu-proyecto.vercel.app/demo/admin` |
+| Organización | `https://tu-proyecto.vercel.app/demo/organization` |
+| Especialista | `https://tu-proyecto.vercel.app/demo/specialist` |
+| Paciente | `https://tu-proyecto.vercel.app/demo/patient` |
+
+### Variables opcionales
+
+Solo necesarias si más adelante activas login y rutas reales (`/admin`, `/patient`, etc.):
+
+| Variable | Cuándo |
+|----------|--------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Auth |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Auth |
+| `DATABASE_URL` | Prisma / rutas reales |
+| `NEXT_PUBLIC_APP_URL` | URL de producción (ej. `https://tu-proyecto.vercel.app`) |
+
+Sin estas variables, las rutas protegidas redirigen al inicio (`/`) en lugar de fallar.
+
+---
+
 ## Requisitos previos
 
 - **Node.js 18+** y **npm**

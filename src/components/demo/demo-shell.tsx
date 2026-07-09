@@ -93,7 +93,7 @@ function RoleSwitcher({ current }: { current: DemoRole }) {
         <Link
           key={r.key}
           href={`/demo/${r.key}`}
-          className={`rounded-full px-3 py-1.5 transition ${
+          className={`rounded-full px-3 py-1.5 transition duration-200 ease-out-soft ${
             current === r.key ? 'bg-brand text-white' : 'text-inkMuted hover:text-ink'
           }`}
         >
@@ -108,7 +108,7 @@ export function MetricGrid({ items }: { items: { label: string; value: string; d
   return (
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {items.map((item) => (
-        <div key={item.label} className="rounded-2xl border border-line bg-surface p-5 shadow-card">
+        <div key={item.label} className="rounded-xl border border-line bg-surface p-5 shadow-card">
           <p className="text-sm text-inkMuted">{item.label}</p>
           <p className="mt-2 font-display text-3xl text-ink">{item.value}</p>
           {item.delta && <p className="mt-2 text-xs text-brand">{item.delta}</p>}
@@ -128,7 +128,7 @@ export function Panel({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-line bg-surface shadow-card">
+    <section className="rounded-xl border border-line bg-surface shadow-card">
       <div className="flex items-center justify-between border-b border-line px-6 py-4">
         <h2 className="font-medium text-ink">{title}</h2>
         {action}
@@ -185,7 +185,7 @@ export function BarChart({
               return (
                 <div
                   key={k.key}
-                  className={`${k.color} rounded-sm transition-all`}
+                  className={`${k.color} rounded-full transition-all duration-300 ease-out-quart`}
                   style={{ width: `${width}%` }}
                   title={`${k.label}: ${val}`}
                 />

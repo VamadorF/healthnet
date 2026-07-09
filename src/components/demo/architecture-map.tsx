@@ -40,7 +40,7 @@ export function ArchitectureMap() {
   return (
     <div className="space-y-8">
       {/* Flujo operativo */}
-      <div className="rounded-2xl border border-line bg-surface p-8 shadow-card">
+      <div className="rounded-xl border border-line bg-surface p-8 shadow-card">
         <h3 className="font-display text-xl text-ink">Flujo entre actores</h3>
         <p className="mt-2 text-sm text-inkMuted">
           Cada rol opera en su módulo. Los permisos suben en cascada institucional.
@@ -51,7 +51,7 @@ export function ArchitectureMap() {
             <Link
               key={card.role}
               href={card.href}
-              className={`group relative rounded-xl border-2 bg-canvas p-5 transition ${card.accent}`}
+              className={`group relative rounded-xl border-2 bg-canvas p-5 transition duration-200 ease-out-soft ${card.accent}`}
             >
               <span className={`inline-block h-2 w-2 rounded-full ${card.dot}`} />
               <h4 className="mt-3 font-medium text-ink">{card.title}</h4>

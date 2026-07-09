@@ -169,11 +169,10 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Renombrar la aplicación de HealthNet a **HealthCloud** en toda la UI, emails, documentación y configuración
 - Consolidar toda la documentación de ejecución en `README.md`
 
-### Eliminado
-- `AGENTS.md`, `DOCS_INDEX.md`, `PROJECT_SUMMARY.md`, `QUICK_START.md`, `SETUP.md`, `PLATFORM.md`
-
 ### Añadido
-- Página de registro (`/signup`) con validación Zod
+- Interfaz demo en `/demo/*` con diseño cuidado y datos realistas (sin base de datos)
+- Sistema visual: tipografía DM Sans + Instrument Serif, paleta clínica, sidebar por rol
+- Landing rediseñada con mapa de arquitectura y acceso directo a cada rol
 - Recuperación de contraseña (`/forgot-password`)
 - Restablecimiento de contraseña (`/reset-password`)
 - Página de perfil editable (`/profile`) con server actions

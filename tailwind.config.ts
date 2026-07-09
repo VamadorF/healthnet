@@ -9,8 +9,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        canvas: '#f6f4f0',
+        ink: '#14212a',
+        inkMuted: '#5c6b76',
+        brand: {
+          DEFAULT: '#0e5e63',
+          dark: '#0a4549',
+          light: '#e8f3f4',
+          soft: '#c5e4e6',
+        },
+        accent: {
+          DEFAULT: '#c45c3e',
+          soft: '#f9ebe6',
+        },
+        surface: '#ffffff',
+        line: '#e2ddd4',
+        role: {
+          admin: '#5b4b8a',
+          org: '#2a6f97',
+          spec: '#1b7a5a',
+          patient: '#b86b25',
+        },
+      },
+      fontFamily: {
+        sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-instrument)', 'Georgia', 'serif'],
+      },
+      boxShadow: {
+        card: '0 1px 2px rgba(20,33,42,0.04), 0 8px 24px rgba(20,33,42,0.06)',
+        lift: '0 12px 40px rgba(20,33,42,0.10)',
       },
     },
   },

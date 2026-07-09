@@ -5,6 +5,7 @@ const PUBLIC_PREFIXES = [
   '/reset-password',
   '/auth',
   '/api',
+  '/demo',
 ] as const;
 
 export function isPublicRoute(pathname: string): boolean {

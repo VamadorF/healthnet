@@ -27,6 +27,28 @@ Tras iniciar sesión, `/dashboard` redirige automáticamente al panel según el 
 
 ---
 
+## Explorar la interfaz (sin configurar nada)
+
+Puedes ver la plataforma completa sin Supabase ni base de datos:
+
+```bash
+npm install
+npm run dev
+```
+
+Abre **http://localhost:3000** y usa **Explorar plataforma**, o entra directo a cada rol:
+
+| Rol | URL |
+|-----|-----|
+| Administrador | http://localhost:3000/demo/admin |
+| Organización | http://localhost:3000/demo/organization |
+| Especialista | http://localhost:3000/demo/specialist |
+| Paciente | http://localhost:3000/demo/patient |
+
+Las rutas `/demo/*` son interfaces estáticas con datos realistas. Las rutas `/admin`, `/organization`, etc. requieren autenticación y Prisma.
+
+---
+
 ## Requisitos previos
 
 - **Node.js 18+** y **npm**

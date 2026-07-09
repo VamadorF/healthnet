@@ -319,8 +319,8 @@ Archivos:
 - [Tailwind Docs](https://tailwindcss.com/docs)
 
 ### Repositorio
-- [GitHub Repo](https://github.com/VamadorF/healthnet)
-- [Pull Request #1](https://github.com/VamadorF/healthnet/pull/1)
+- [GitHub Repo](https://github.com/VamadorF/HealthCloud)
+- [Pull Request #1](https://github.com/VamadorF/HealthCloud/pull/1)
 
 ---
 

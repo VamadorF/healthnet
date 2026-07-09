@@ -10,7 +10,7 @@ export function AppNav({ email }: AppNavProps) {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6">
           <Link href="/dashboard" className="text-lg font-semibold text-blue-600">
-            HealthNet
+            HealthCloud
           </Link>
           <nav className="flex gap-4 text-sm">
             <Link

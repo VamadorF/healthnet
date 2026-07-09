@@ -1,4 +1,4 @@
-# 📚 Índice de Documentación - HealthNet
+# 📚 Índice de Documentación - HealthCloud
 
 Esta es la guía de navegación para toda la documentación del proyecto.
 
@@ -319,8 +319,8 @@ Archivos:
 - [Tailwind Docs](https://tailwindcss.com/docs)
 
 ### Repositorio
-- [GitHub Repo](https://github.com/VamadorF/healthnet)
-- [Pull Request #1](https://github.com/VamadorF/healthnet/pull/1)
+- [GitHub Repo](https://github.com/VamadorF/HealthCloud)
+- [Pull Request #1](https://github.com/VamadorF/HealthCloud/pull/1)
 
 ---
 

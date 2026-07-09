@@ -17,7 +17,7 @@ export function AuthCard({ title, description, children, footer }: AuthCardProps
             href="/"
             className="block text-center text-sm font-medium text-blue-600 hover:text-blue-500"
           >
-            HealthNet
+            HealthCloud
           </Link>
           <h2 className="mt-4 text-center text-3xl font-bold tracking-tight">{title}</h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">

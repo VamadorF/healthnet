@@ -7,7 +7,7 @@ export async function sendWelcomeEmail(to: string, userName: string) {
     const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to,
-      subject: '¡Bienvenido a HealthNet!',
+      subject: '¡Bienvenido a HealthCloud!',
       react: WelcomeEmail({ userName }),
     });
 

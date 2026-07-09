@@ -5,7 +5,7 @@ import { LoginForm } from '@/components/auth/login-form';
 export default function LoginPage() {
   return (
     <AuthCard
-      title="Iniciar sesión en HealthNet"
+      title="Iniciar sesión en HealthCloud"
       description="Ingresa tus credenciales para acceder"
       footer={
         <p>

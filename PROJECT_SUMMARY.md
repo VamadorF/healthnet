@@ -1,4 +1,4 @@
-# 📊 Resumen del Proyecto HealthNet
+# 📊 Resumen del Proyecto HealthCloud
 
 ## 🎯 Objetivo
 Aplicación web completa de gestión de salud construida con tecnologías modernas y escalables.
@@ -55,7 +55,7 @@ Aplicación web completa de gestión de salud construida con tecnologías modern
 ## 📁 Estructura del Proyecto
 
 ```
-healthnet/
+healthcloud/
 ├── 📄 Configuración Base
 │   ├── package.json           # Dependencias
 │   ├── tsconfig.json          # TypeScript
@@ -246,8 +246,8 @@ supabase db push         # Push de migraciones
 
 | Recurso | URL |
 |---------|-----|
-| **Repositorio** | https://github.com/VamadorF/healthnet |
-| **Pull Request** | https://github.com/VamadorF/healthnet/pull/1 |
+| **Repositorio** | https://github.com/VamadorF/HealthCloud |
+| **Pull Request** | https://github.com/VamadorF/HealthCloud/pull/1 |
 | **Next.js Docs** | https://nextjs.org/docs |
 | **Supabase Docs** | https://supabase.com/docs |
 | **Sentry Docs** | https://docs.sentry.io |

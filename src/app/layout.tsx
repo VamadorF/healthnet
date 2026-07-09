@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'HealthNet',
+  title: 'HealthCloud',
   description: 'Aplicación de salud con Next.js, TypeScript y Supabase',
 };
 

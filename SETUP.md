@@ -1,4 +1,4 @@
-# Guía de Configuración Rápida - HealthNet
+# Guía de Configuración Rápida - HealthCloud
 
 Esta guía te ayudará a configurar el proyecto paso a paso.
 
@@ -7,7 +7,7 @@ Esta guía te ayudará a configurar el proyecto paso a paso.
 ```bash
 # Clonar el repositorio
 git clone <url-del-repositorio>
-cd healthnet
+cd healthcloud
 
 # Instalar dependencias
 npm install
@@ -23,7 +23,7 @@ cp .env.example .env.local
 1. Ve a [supabase.com](https://supabase.com)
 2. Click en "New Project"
 3. Completa:
-   - Nombre: `healthnet`
+   - Nombre: `healthcloud`
    - Database Password: (guarda esta contraseña)
    - Region: elige la más cercana
 4. Espera a que el proyecto se cree (2-3 minutos)
@@ -75,12 +75,12 @@ Esto creará:
 3. Selecciona:
    - Platform: **Next.js**
    - Alert frequency: elige según preferencia
-   - Nombre: `healthnet`
+   - Nombre: `healthcloud`
 
 ### Obtener Credenciales
 
 1. En la página del proyecto, copia el **DSN** → `NEXT_PUBLIC_SENTRY_DSN`
-2. Ve a **Settings** → **Projects** → `healthnet` → **Client Keys (DSN)**
+2. Ve a **Settings** → **Projects** → `healthcloud` → **Client Keys (DSN)**
 3. Para deployment, necesitas un Auth Token:
    - Ve a **Settings** → **Account** → **Auth Tokens**
    - Click "Create New Token"
@@ -99,7 +99,7 @@ Esto creará:
 2. Crea una cuenta
 3. Ve a **API Keys**
 4. Click "Create API Key"
-5. Nombre: `healthnet`
+5. Nombre: `healthcloud`
 6. Copia la key → `RESEND_API_KEY`
 
 ### Configurar Dominio
@@ -127,7 +127,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=eyJ...
 NEXT_PUBLIC_SENTRY_DSN=https://...
 SENTRY_ORG=tu-org
-SENTRY_PROJECT=healthnet
+SENTRY_PROJECT=healthcloud
 SENTRY_AUTH_TOKEN=sntrys_...
 RESEND_API_KEY=re_...
 RESEND_FROM_EMAIL=noreply@tudominio.com

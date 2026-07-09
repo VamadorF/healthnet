@@ -1,0 +1,235 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  ORGANIZATION
+  SPECIALIST
+  PATIENT
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  PENDING
+}
+
+enum OrganizationStatus {
+  ACTIVE
+  BLOCKED
+  PENDING
+}
+
+enum MembershipStatus {
+  ACTIVE
+  REMOVED
+  PENDING
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  REVOKED
+}
+
+enum AppointmentStatus {
+  REQUESTED
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum UrgencyLevel {
+  LOW
+  MEDIUM
+  HIGH
+  EMERGENCY
+}
+
+model User {
+  id         String     @id @default(cuid())
+  supabaseId String     @unique @map("supabase_id")
+  email      String     @unique
+  fullName   String?    @map("full_name")
+  role       UserRole   @default(PATIENT)
+  status     UserStatus @default(ACTIVE)
+  createdAt  DateTime   @default(now()) @map("created_at")
+  updatedAt  DateTime   @updatedAt @map("updated_at")
+
+  ownedOrganization Organization?       @relation("OrganizationOwner")
+  specialistProfile SpecialistProfile?
+  patientProfile    PatientProfile?
+  sentInvitations   Invitation[]        @relation("InvitationSender")
+  specialistMemberships OrganizationSpecialist[] @relation("SpecialistUser")
+  specialistAppointments  Appointment[] @relation("SpecialistAppointments")
+  patientAppointments     Appointment[] @relation("PatientAppointments")
+  consultations           Consultation[] @relation("ConsultationSpecialist")
+  symptomReports          SymptomReport[]
+
+  @@map("users")
+}
+
+model Organization {
+  id          String             @id @default(cuid())
+  name        String
+  description String?
+  address     String?
+  phone       String?
+  status      OrganizationStatus @default(PENDING)
+  ownerId     String             @unique @map("owner_id")
+  invitedById String?            @map("invited_by_id")
+  blockedAt   DateTime?          @map("blocked_at")
+  createdAt   DateTime           @default(now()) @map("created_at")
+  updatedAt   DateTime           @updatedAt @map("updated_at")
+
+  owner       User                     @relation("OrganizationOwner", fields: [ownerId], references: [id])
+  specialists OrganizationSpecialist[]
+  appointments Appointment[]
+  invitations Invitation[]
+
+  @@map("organizations")
+}
+
+model OrganizationSpecialist {
+  id             String           @id @default(cuid())
+  organizationId String           @map("organization_id")
+  specialistId   String           @map("specialist_id")
+  status         MembershipStatus @default(PENDING)
+  specialty      String?
+  joinedAt       DateTime?        @map("joined_at")
+  removedAt      DateTime?        @map("removed_at")
+  createdAt      DateTime         @default(now()) @map("created_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  specialist   User         @relation("SpecialistUser", fields: [specialistId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, specialistId])
+  @@map("organization_specialists")
+}
+
+model SpecialistProfile {
+  id             String   @id @default(cuid())
+  userId         String   @unique @map("user_id")
+  licenseNumber  String?  @map("license_number")
+  specialty      String?
+  bio            String?
+  scheduleConfig Json?    @map("schedule_config")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("specialist_profiles")
+}
+
+model PatientProfile {
+  id               String   @id @default(cuid())
+  userId           String   @unique @map("user_id")
+  dateOfBirth      DateTime? @map("date_of_birth")
+  bloodType        String?  @map("blood_type")
+  allergies        Json?
+  emergencyContact Json?    @map("emergency_contact")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("patient_profiles")
+}
+
+model Invitation {
+  id               String           @id @default(cuid())
+  email            String
+  role             UserRole
+  organizationName String?          @map("organization_name")
+  token            String           @unique @default(cuid())
+  status         InvitationStatus @default(PENDING)
+  organizationId String?          @map("organization_id")
+  invitedById    String           @map("invited_by_id")
+  expiresAt      DateTime         @map("expires_at")
+  acceptedAt     DateTime?        @map("accepted_at")
+  createdAt      DateTime         @default(now()) @map("created_at")
+
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  invitedBy    User          @relation("InvitationSender", fields: [invitedById], references: [id])
+
+  @@map("invitations")
+}
+
+model Appointment {
+  id             String            @id @default(cuid())
+  patientId      String            @map("patient_id")
+  specialistId   String?           @map("specialist_id")
+  organizationId String?           @map("organization_id")
+  scheduledAt    DateTime          @map("scheduled_at")
+  status         AppointmentStatus @default(REQUESTED)
+  reason         String?
+  symptoms       Json?
+  notes          String?
+  createdAt      DateTime          @default(now()) @map("created_at")
+  updatedAt      DateTime          @updatedAt @map("updated_at")
+
+  patient      User          @relation("PatientAppointments", fields: [patientId], references: [id])
+  specialist   User?         @relation("SpecialistAppointments", fields: [specialistId], references: [id])
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  consultation Consultation?
+
+  @@map("appointments")
+}
+
+model Consultation {
+  id            String   @id @default(cuid())
+  appointmentId String   @unique @map("appointment_id")
+  specialistId  String   @map("specialist_id")
+  clinicalData  Json     @map("clinical_data")
+  diagnosis     String?
+  treatment     Json?
+  vitals        Json?
+  attachments   Json?
+  completedAt   DateTime @default(now()) @map("completed_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  appointment Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  specialist  User        @relation("ConsultationSpecialist", fields: [specialistId], references: [id])
+
+  @@map("consultations")
+}
+
+model SymptomReport {
+  id              String       @id @default(cuid())
+  patientId       String       @map("patient_id")
+  urgencyLevel    UrgencyLevel @map("urgency_level")
+  description     String
+  visualSymptoms  Json?        @map("visual_symptoms")
+  bodyAreas       Json?        @map("body_areas")
+  duration        String?
+  isEmergency     Boolean      @default(false) @map("is_emergency")
+  createdAt       DateTime     @default(now()) @map("created_at")
+
+  patient User @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("symptom_reports")
+}
+
+model UsageMetric {
+  id             String   @id @default(cuid())
+  date           DateTime @unique @db.Date
+  totalUsers     Int      @default(0) @map("total_users")
+  activeUsers    Int      @default(0) @map("active_users")
+  appointments   Int      @default(0)
+  consultations  Int      @default(0)
+  organizations  Int      @default(0)
+  symptomReports Int      @default(0) @map("symptom_reports")
+  metadata       Json?
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("usage_metrics")
+}

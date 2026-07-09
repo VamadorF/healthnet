@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'HealthCloud',
-  description: 'Aplicación de salud con Next.js, TypeScript y Supabase',
+  description: 'Plataforma integral de gestión de servicios de salud con roles escalonados',
 };
 
 export default function RootLayout({

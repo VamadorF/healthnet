@@ -1,24 +1,19 @@
-import { createClient } from '@/lib/supabase/server';
 import { getSignedUrl } from '@/lib/supabase/storage';
-import { redirect } from 'next/navigation';
-import { AppNav } from '@/components/layout/app-nav';
+import { createClient } from '@/lib/supabase/server';
+import { requireAuth } from '@/lib/auth/session';
+import { PlatformShell } from '@/components/platform/platform-shell';
 import { ProfileForm } from '@/components/profile/profile-form';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProfilePage() {
+  const user = await requireAuth();
   const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect('/login');
-  }
 
   const { data: profile } = await supabase
     .from('profiles')
     .select('full_name, avatar_url')
-    .eq('id', user.id)
+    .eq('id', user.supabaseId)
     .single();
 
   let avatarUrl: string | null = null;
@@ -31,22 +26,19 @@ export default async function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <AppNav email={user.email ?? ''} />
-      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="rounded-lg bg-white p-6 shadow dark:bg-gray-800">
-          <h1 className="mb-2 text-3xl font-bold">Mi perfil</h1>
-          <p className="mb-8 text-gray-600 dark:text-gray-400">
-            Administra tu información personal y tu avatar
-          </p>
-          <ProfileForm
-            userId={user.id}
-            email={user.email ?? ''}
-            fullName={profile?.full_name ?? ''}
-            avatarUrl={avatarUrl}
-          />
-        </div>
+    <PlatformShell
+      user={user}
+      title="Mi cuenta"
+      description="Administra tu información personal y tu avatar"
+    >
+      <div className="max-w-2xl rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+        <ProfileForm
+          userId={user.supabaseId}
+          email={user.email}
+          fullName={profile?.full_name ?? user.fullName ?? ''}
+          avatarUrl={avatarUrl}
+        />
       </div>
-    </div>
+    </PlatformShell>
   );
 }

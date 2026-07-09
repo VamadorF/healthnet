@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
-import { DM_Sans, Instrument_Serif } from 'next/font/google';
+import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 
-const dmSans = DM_Sans({
+const plexSans = IBM_Plex_Sans({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-plex-sans',
 });
 
-const instrument = Instrument_Serif({
+const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: '400',
-  variable: '--font-instrument',
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
 });
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${dmSans.variable} ${instrument.variable}`}>
+    <html lang="es" className={`${plexSans.variable} ${plexMono.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

@@ -17,7 +17,7 @@ export default function DemoPatientHistoryPage() {
               )}
               <div className="relative z-10 mt-1.5 h-3.5 w-3.5 rounded-full border-2 border-brand bg-surface" />
               <div className="flex-1">
-                <p className="text-xs font-medium text-brand">{item.date}</p>
+                <p className="font-mono text-xs font-medium text-brand tabular">{item.date}</p>
                 <p className="mt-1 font-medium text-ink">{item.title}</p>
                 <p className="text-sm text-inkMuted">{item.doctor}</p>
                 <p className="mt-2 text-sm leading-relaxed text-inkMuted">{item.summary}</p>

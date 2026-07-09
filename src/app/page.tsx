@@ -1,20 +1,36 @@
 import Link from 'next/link';
 import { ArchitectureMap } from '@/components/demo/architecture-map';
 
+const AGENDA_PREVIEW = [
+  { t: '09:00', p: 'Camila Soto', s: 'Confirmada', tone: 'bg-success-soft text-success', dot: 'bg-success' },
+  { t: '09:45', p: 'Roberto Díaz', s: 'En sala', tone: 'bg-brand-light text-brand-dark', dot: 'bg-brand' },
+  { t: '10:30', p: 'María José Vera', s: 'Confirmada', tone: 'bg-success-soft text-success', dot: 'bg-success' },
+];
+
+const ROLE_CARDS = [
+  { href: '/demo/admin', title: 'Administrador', sub: '24 organizaciones · reportes globales', rail: 'bg-role-admin' },
+  { href: '/demo/organization', title: 'Organización', sub: 'Clínica Andes Norte · 18 especialistas', rail: 'bg-role-org' },
+  { href: '/demo/specialist', title: 'Especialista', sub: '4 citas hoy · 3 consultas pendientes', rail: 'bg-role-spec' },
+  { href: '/demo/patient', title: 'Paciente', sub: 'Próxima cita hoy 09:00', rail: 'bg-role-patient' },
+];
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-canvas grain">
+    <div className="min-h-screen bg-canvas text-ink">
       {/* Nav */}
-      <header className="border-b border-line/60 bg-surface/70 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <span className="font-display text-xl text-ink">HealthCloud</span>
+      <header className="sticky top-0 z-20 border-b border-line bg-canvas/85 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5">
+          <span className="flex items-center gap-2 text-[15px] font-semibold tracking-tight">
+            <span className="h-4 w-1.5 rounded-full bg-brand" />
+            HealthCloud
+          </span>
           <nav className="flex items-center gap-6 text-sm">
-            <a href="#arquitectura" className="text-inkMuted hover:text-ink">Arquitectura</a>
-            <a href="#roles" className="text-inkMuted hover:text-ink">Roles</a>
-            <Link href="/login" className="text-inkMuted hover:text-ink">Acceso</Link>
+            <a href="#arquitectura" className="hidden text-inkMuted transition-colors hover:text-ink sm:block">Arquitectura</a>
+            <a href="#roles" className="hidden text-inkMuted transition-colors hover:text-ink sm:block">Roles</a>
+            <Link href="/login" className="text-inkMuted transition-colors hover:text-ink">Acceso</Link>
             <Link
               href="/demo/admin"
-              className="rounded-full bg-brand px-4 py-2 text-sm font-medium text-white transition hover:bg-brand-dark"
+              className="rounded-lg bg-brand px-3.5 py-2 text-sm font-medium text-white shadow-xs transition-colors hover:bg-brand-dark"
             >
               Explorar plataforma
             </Link>
@@ -24,62 +40,56 @@ export default function Home() {
 
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-6 pb-20 pt-16 md:pt-24">
-        <div className="grid items-end gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
-            <p className="text-sm font-medium uppercase tracking-widest text-brand">
-              Gestión de salud
-            </p>
-            <h1 className="mt-4 font-display text-4xl leading-[1.1] text-ink md:text-5xl lg:text-[3.25rem]">
-              Una plataforma donde cada actor sabe exactamente dónde está
+            <span className="eyebrow">Gestión de servicios de salud</span>
+            <h1 className="mt-4 text-4xl font-semibold leading-[1.08] tracking-tightest text-ink md:text-5xl">
+              Cada actor sabe exactamente dónde está
             </h1>
-            <p className="mt-6 max-w-lg text-lg leading-relaxed text-inkMuted">
+            <p className="mt-5 max-w-lg text-lg leading-relaxed text-inkMuted">
               HealthCloud conecta administradores, clínicas, especialistas y pacientes
               en flujos separados pero coordinados. Sin ruido, sin pantallas genéricas.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-9 flex flex-wrap gap-3">
               <Link
                 href="/demo/patient"
-                className="rounded-full bg-brand px-6 py-3 text-sm font-medium text-white shadow-lift transition hover:bg-brand-dark"
+                className="rounded-lg bg-brand px-5 py-2.5 text-sm font-medium text-white shadow-card transition-colors hover:bg-brand-dark"
               >
                 Entrar como paciente
               </Link>
               <Link
                 href="/demo/admin"
-                className="rounded-full border border-line bg-surface px-6 py-3 text-sm font-medium text-ink transition hover:border-brand/40"
+                className="rounded-lg border border-line bg-surface px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:border-lineStrong"
               >
                 Ver panel administrativo
               </Link>
             </div>
           </div>
 
-          {/* Visual preview card */}
-          <div className="relative">
-            <div className="rounded-2xl border border-line bg-surface p-6 shadow-lift">
-              <div className="flex items-center gap-2 border-b border-line pb-4">
-                <div className="h-3 w-3 rounded-full bg-role-spec" />
-                <div className="h-3 w-3 rounded-full bg-role-org" />
-                <div className="h-3 w-3 rounded-full bg-role-patient" />
-                <span className="ml-2 text-xs text-inkMuted">Agenda · Dr. Tomás Figueroa</span>
+          {/* Live specimen — the product's most characteristic view */}
+          <div className="rounded-2xl border border-line bg-surface p-2 shadow-lift">
+            <div className="rounded-xl bg-canvas p-4">
+              <div className="flex items-center gap-2.5 pb-3">
+                <span className="h-4 w-1.5 rounded-full bg-role-spec" />
+                <span className="text-sm font-medium text-ink">Agenda · Dr. Tomás Figueroa</span>
+                <span className="ml-auto font-mono text-xs text-inkFaint tabular">Mié 9 Abr</span>
               </div>
-              <div className="mt-4 space-y-3">
-                {[
-                  { t: '09:00', p: 'Camila Soto', s: 'Confirmada' },
-                  { t: '09:45', p: 'Roberto Díaz', s: 'En sala' },
-                  { t: '10:30', p: 'María José Vera', s: 'Confirmada' },
-                ].map((row) => (
-                  <div key={row.t} className="flex items-center justify-between rounded-lg bg-canvas px-4 py-3">
-                    <div>
-                      <span className="text-xs font-medium text-brand">{row.t}</span>
-                      <p className="text-sm font-medium text-ink">{row.p}</p>
-                    </div>
-                    <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs text-emerald-700">
+              <div className="space-y-2">
+                {AGENDA_PREVIEW.map((row) => (
+                  <div
+                    key={row.t}
+                    className="flex items-center gap-3 rounded-lg border border-line bg-surface px-3.5 py-2.5"
+                  >
+                    <span className="font-mono text-xs font-medium text-brand tabular">{row.t}</span>
+                    <span className="text-sm font-medium text-ink">{row.p}</span>
+                    <span className={`ml-auto inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ${row.tone}`}>
+                      <span className={`h-1.5 w-1.5 rounded-full ${row.dot}`} />
                       {row.s}
                     </span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="absolute -bottom-4 -left-4 -z-10 h-full w-full rounded-2xl bg-brand/10" />
           </div>
         </div>
       </section>
@@ -87,30 +97,30 @@ export default function Home() {
       {/* Roles quick access */}
       <section id="roles" className="border-t border-line bg-surface py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="font-display text-3xl text-ink">Cuatro interfaces, un solo sistema</h2>
+          <span className="eyebrow">Cuatro interfaces, un sistema</span>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tightest text-ink">
+            Cada rol tiene su propio espacio de trabajo
+          </h2>
           <p className="mt-3 max-w-2xl text-inkMuted">
-            Cada rol tiene su propio espacio de trabajo. Navega entre ellos para ver
-            cómo se organiza la información en la arquitectura real del producto.
+            Navega entre ellos para ver cómo se organiza la información en la
+            arquitectura real del producto.
           </p>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2">
-            {[
-              { href: '/demo/admin', title: 'Administrador', sub: '24 organizaciones · reportes globales', color: 'bg-role-admin' },
-              { href: '/demo/organization', title: 'Organización', sub: 'Clínica Andes Norte · 18 especialistas', color: 'bg-role-org' },
-              { href: '/demo/specialist', title: 'Especialista', sub: '4 citas hoy · 3 consultas pendientes', color: 'bg-role-spec' },
-              { href: '/demo/patient', title: 'Paciente', sub: 'Próxima cita hoy 09:00', color: 'bg-role-patient' },
-            ].map((card) => (
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {ROLE_CARDS.map((card) => (
               <Link
                 key={card.href}
                 href={card.href}
-                className="group flex items-center gap-5 rounded-2xl border border-line bg-canvas p-6 transition hover:border-brand/30 hover:shadow-card"
+                className="group flex items-center gap-4 rounded-xl border border-line bg-canvas p-5 transition-all hover:border-lineStrong hover:shadow-card"
               >
-                <div className={`h-12 w-1.5 rounded-full ${card.color}`} />
+                <span className={`h-10 w-1 rounded-full ${card.rail}`} />
                 <div className="flex-1">
-                  <h3 className="font-medium text-ink group-hover:text-brand">{card.title}</h3>
-                  <p className="mt-1 text-sm text-inkMuted">{card.sub}</p>
+                  <h3 className="text-[15px] font-semibold text-ink">{card.title}</h3>
+                  <p className="mt-0.5 text-sm text-inkMuted">{card.sub}</p>
                 </div>
-                <span className="text-brand opacity-0 transition group-hover:opacity-100">→</span>
+                <span className="text-inkFaint transition-transform group-hover:translate-x-0.5 group-hover:text-brand" aria-hidden>
+                  →
+                </span>
               </Link>
             ))}
           </div>
@@ -120,24 +130,25 @@ export default function Home() {
       {/* Architecture */}
       <section id="arquitectura" className="py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="font-display text-3xl text-ink">Dónde vive cada cosa</h2>
+          <span className="eyebrow">Arquitectura</span>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tightest text-ink">Dónde vive cada cosa</h2>
           <p className="mt-3 max-w-2xl text-inkMuted">
             La misma estructura que verás en producción: capas claras, roles aislados,
             datos clínicos en PostgreSQL y autenticación en Supabase.
           </p>
-          <div className="mt-12">
+          <div className="mt-10">
             <ArchitectureMap />
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-line py-10">
+      <footer className="border-t border-line bg-surface py-9">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-inkMuted md:flex-row">
           <span>HealthCloud · Next.js · Prisma · Supabase · Render</span>
           <div className="flex gap-6">
-            <Link href="/login" className="hover:text-ink">Iniciar sesión</Link>
-            <Link href="/signup" className="hover:text-ink">Registrarse</Link>
+            <Link href="/login" className="transition-colors hover:text-ink">Iniciar sesión</Link>
+            <Link href="/signup" className="transition-colors hover:text-ink">Registrarse</Link>
           </div>
         </div>
       </footer>

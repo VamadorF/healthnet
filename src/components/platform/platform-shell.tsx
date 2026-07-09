@@ -2,6 +2,13 @@ import Link from 'next/link';
 import { User, UserRole } from '@prisma/client';
 import { getRoleLabel, getRoleNav } from '@/lib/auth/navigation';
 
+const ROLE_ACCENT: Record<UserRole, string> = {
+  ADMIN: 'bg-role-admin',
+  ORGANIZATION: 'bg-role-org',
+  SPECIALIST: 'bg-role-spec',
+  PATIENT: 'bg-role-patient',
+};
+
 interface PlatformNavProps {
   user: User;
 }
@@ -10,41 +17,41 @@ export function PlatformNav({ user }: PlatformNavProps) {
   const navItems = getRoleNav(user.role);
 
   return (
-    <header className="border-b border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-20 border-b border-line bg-canvas/85 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <Link href={navItems[0]?.href ?? '/'} className="text-lg font-semibold text-blue-600">
+          <Link
+            href={navItems[0]?.href ?? '/'}
+            className="flex items-center gap-2 text-[15px] font-semibold tracking-tight text-ink"
+          >
+            <span className={`h-4 w-1.5 rounded-full ${ROLE_ACCENT[user.role]}`} />
             HealthCloud
           </Link>
-          <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
-            {getRoleLabel(user.role)}
-          </span>
-          <nav className="flex flex-wrap gap-3 text-sm">
+          <RoleBadge role={user.role} />
+          <nav className="flex flex-wrap gap-1 text-sm">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                className="rounded-lg px-2.5 py-1.5 font-medium text-inkMuted transition-colors hover:bg-surfaceMuted hover:text-ink"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
         </div>
-        <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            {user.fullName ?? user.email}
-          </span>
+        <div className="flex items-center gap-3">
+          <span className="hidden text-sm text-inkMuted sm:block">{user.fullName ?? user.email}</span>
           <Link
             href="/profile"
-            className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300"
+            className="rounded-lg px-2.5 py-1.5 text-sm font-medium text-inkMuted transition-colors hover:bg-surfaceMuted hover:text-ink"
           >
             Cuenta
           </Link>
           <form action="/auth/signout" method="post">
             <button
               type="submit"
-              className="rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-red-500"
+              className="rounded-lg border border-line bg-surface px-3 py-1.5 text-sm font-medium text-danger transition-colors hover:border-danger/40 hover:bg-danger-soft"
             >
               Salir
             </button>
@@ -64,14 +71,12 @@ interface PlatformShellProps {
 
 export function PlatformShell({ user, title, description, children }: PlatformShellProps) {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-canvas text-ink">
       <PlatformNav user={user} />
       <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold">{title}</h1>
-          {description && (
-            <p className="mt-2 text-gray-600 dark:text-gray-400">{description}</p>
-          )}
+          <h1 className="text-[28px] font-semibold tracking-tightest text-ink">{title}</h1>
+          {description && <p className="mt-1.5 max-w-2xl text-inkMuted">{description}</p>}
         </div>
         {children}
       </main>
@@ -87,10 +92,10 @@ interface StatCardProps {
 
 export function StatCard({ label, value, hint }: StatCardProps) {
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-      <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
-      <p className="mt-2 text-3xl font-bold">{value}</p>
-      {hint && <p className="mt-1 text-xs text-gray-400">{hint}</p>}
+    <div className="rounded-xl border border-line bg-surface p-5 shadow-card">
+      <p className="eyebrow">{label}</p>
+      <p className="mt-3 text-[28px] font-semibold leading-none tracking-tightest text-ink tabular">{value}</p>
+      {hint && <p className="mt-2.5 text-xs font-medium text-inkMuted">{hint}</p>}
     </div>
   );
 }
@@ -100,15 +105,9 @@ interface RoleBadgeProps {
 }
 
 export function RoleBadge({ role }: RoleBadgeProps) {
-  const colors: Record<UserRole, string> = {
-    ADMIN: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
-    ORGANIZATION: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
-    SPECIALIST: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
-    PATIENT: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300',
-  };
-
   return (
-    <span className={`rounded-full px-2 py-1 text-xs font-medium ${colors[role]}`}>
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-2.5 py-0.5 text-xs font-medium text-inkMuted">
+      <span className={`h-1.5 w-1.5 rounded-full ${ROLE_ACCENT[role]}`} />
       {getRoleLabel(role)}
     </span>
   );

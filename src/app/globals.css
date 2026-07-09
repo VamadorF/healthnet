@@ -3,32 +3,62 @@
 @tailwind utilities;
 
 :root {
-  --background: #f6f4f0;
-  --foreground: #14212a;
+  --background: #f2f5f5;
+  --foreground: #13262a;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-family: var(--font-plex-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@layer base {
+  /* Dynamic figures read as a lab/schedule readout — never jitter. */
+  .tabular,
+  th,
+  td {
+    font-variant-numeric: tabular-nums;
+  }
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(14, 94, 99, 0.22);
+    border-radius: 6px;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Eyebrow / metadata label — the muted, tracked, small tier. */
+  .eyebrow {
+    @apply text-[11px] font-medium uppercase tracking-[0.12em] text-inkFaint;
+  }
 }
 
-/* Subtle grain for depth — not "mock", just texture */
-.grain {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-}
-
-.demo-sidebar-link {
-  @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/75 transition hover:bg-white/10 hover:text-white;
-}
-
-.demo-sidebar-link-active {
-  @apply bg-white/15 text-white font-medium;
+@layer components {
+  /* Sidebar sits on the canvas — one world, not two. Role identity is a
+     thin left rail on the active item, not a repainted panel. */
+  .side-link {
+    @apply relative flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium text-inkMuted transition-colors duration-150;
+    @apply hover:bg-surfaceMuted hover:text-ink;
+  }
+  .side-link-active {
+    @apply bg-surfaceMuted text-ink;
+  }
 }

@@ -35,11 +35,11 @@ export default function DemoSpecialistPage() {
           title="Siguiente paso"
           action={<Link href="/demo/specialist/consultations" className="text-sm text-brand hover:underline">Ir a consultas</Link>}
         >
-          <div className="rounded-xl bg-canvas p-5">
-            <p className="text-xs font-medium text-brand">Ahora · 09:45</p>
-            <p className="mt-2 font-display text-xl text-ink">Roberto Díaz</p>
+          <div className="rounded-xl border border-line bg-canvas p-5">
+            <p className="font-mono text-xs font-medium text-brand tabular">Ahora · 09:45</p>
+            <p className="mt-2 text-xl font-semibold tracking-tight text-ink">Roberto Díaz</p>
             <p className="mt-1 text-sm text-inkMuted">Seguimiento diabetes · En sala de espera</p>
-            <button className="mt-5 rounded-full bg-brand px-5 py-2 text-sm font-medium text-white">
+            <button className="mt-5 rounded-lg bg-brand px-5 py-2 text-sm font-medium text-white shadow-xs transition-[colors,transform] duration-150 hover:bg-brand-dark active:scale-[0.98]">
               Iniciar consulta
             </button>
           </div>

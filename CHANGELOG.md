@@ -164,10 +164,13 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Sincronización Supabase Auth → Prisma User
 - Seed de datos demo por rol
 - Configuración de despliegue en Render (`render.yaml`)
-- Documentación de plataforma (`PLATFORM.md`)
 
 ### Cambiado
 - Renombrar la aplicación de HealthNet a **HealthCloud** en toda la UI, emails, documentación y configuración
+- Consolidar toda la documentación de ejecución en `README.md`
+
+### Eliminado
+- `AGENTS.md`, `DOCS_INDEX.md`, `PROJECT_SUMMARY.md`, `QUICK_START.md`, `SETUP.md`, `PLATFORM.md`
 
 ### Añadido
 - Página de registro (`/signup`) con validación Zod

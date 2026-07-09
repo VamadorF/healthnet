@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { requireRole } from '@/lib/auth/session';
-import { PlatformShell } from '@/components/platform/platform-shell';
+import { PlatformShell, EmptyState } from '@/components/platform/platform-shell';
 
 export default async function SpecialistPatientsPage() {
   const user = await requireRole('SPECIALIST');
@@ -23,17 +23,19 @@ export default async function SpecialistPatientsPage() {
         {patients.map((patient) => (
           <div
             key={patient.id}
-            className="rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800"
+            className="rounded-xl border border-line bg-surface p-5 shadow-card"
           >
-            <h3 className="font-semibold">{patient.fullName ?? patient.email}</h3>
-            <p className="mt-1 text-sm text-gray-500">{patient.email}</p>
+            <h3 className="font-medium text-ink">{patient.fullName ?? patient.email}</h3>
+            <p className="mt-1 text-sm text-inkMuted">{patient.email}</p>
             {patient.patientProfile?.bloodType && (
-              <p className="mt-2 text-sm">Tipo de sangre: {patient.patientProfile.bloodType}</p>
+              <p className="mt-2 text-sm text-ink">Tipo de sangre: {patient.patientProfile.bloodType}</p>
             )}
           </div>
         ))}
         {patients.length === 0 && (
-          <p className="col-span-2 text-center text-gray-500">Aún no tienes pacientes asignados.</p>
+          <div className="sm:col-span-2">
+            <EmptyState>Aún no tienes pacientes asignados.</EmptyState>
+          </div>
         )}
       </div>
     </PlatformShell>

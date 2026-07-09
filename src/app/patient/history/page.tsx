@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { requireRole } from '@/lib/auth/session';
-import { PlatformShell } from '@/components/platform/platform-shell';
+import { PlatformShell, StatusBadge, EmptyState } from '@/components/platform/platform-shell';
 import { formatDateTime } from '@/utils/format';
 
 export default async function PatientHistoryPage() {
@@ -22,27 +22,27 @@ export default async function PatientHistoryPage() {
       title="Historial médico"
       description="Consulta el registro completo de tus atenciones y diagnósticos"
     >
-      <div className="space-y-6">
+      <div className="space-y-4">
         {appointments.map((appt) => (
           <div
             key={appt.id}
-            className="rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800"
+            className="rounded-xl border border-line bg-surface p-6 shadow-card"
           >
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="font-semibold">{formatDateTime(appt.scheduledAt)}</h3>
-              <span className="text-xs text-blue-600">{appt.status}</span>
+              <h3 className="font-medium text-ink">{formatDateTime(appt.scheduledAt)}</h3>
+              <StatusBadge status={appt.status} />
             </div>
-            <p className="mt-1 text-sm text-gray-500">{appt.reason}</p>
+            <p className="mt-1 text-sm text-inkMuted">{appt.reason}</p>
             {appt.organization && (
-              <p className="text-sm text-gray-400">Centro: {appt.organization.name}</p>
+              <p className="text-sm text-inkMuted">Centro: {appt.organization.name}</p>
             )}
             {appt.specialist && (
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-inkMuted">
                 Especialista: {appt.specialist.fullName ?? appt.specialist.email}
               </p>
             )}
             {appt.consultation && (
-              <div className="mt-4 rounded-md bg-gray-50 p-4 text-sm dark:bg-gray-900">
+              <div className="mt-4 rounded-lg bg-canvas p-4 text-sm text-ink">
                 <p><strong>Diagnóstico:</strong> {appt.consultation.diagnosis}</p>
                 <p className="mt-1">
                   <strong>Tratamiento:</strong>{' '}
@@ -53,7 +53,7 @@ export default async function PatientHistoryPage() {
           </div>
         ))}
         {appointments.length === 0 && (
-          <p className="text-center text-gray-500">Tu historial médico aparecerá aquí tras tus primeras atenciones.</p>
+          <EmptyState>Tu historial médico aparecerá aquí tras tus primeras atenciones.</EmptyState>
         )}
       </div>
     </PlatformShell>

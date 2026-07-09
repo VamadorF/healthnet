@@ -1,8 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { requireRole } from '@/lib/auth/session';
-import { PlatformShell } from '@/components/platform/platform-shell';
+import { PlatformShell, StatusBadge, EmptyState } from '@/components/platform/platform-shell';
 import { inviteSpecialist, removeSpecialist, activateSpecialist } from '@/app/organization/actions';
-import { Button } from '@/components/ui/button';
+import { SubmitButton } from '@/components/ui/submit-button';
 import { Input } from '@/components/ui/input';
 
 export default async function OrganizationSpecialistsPage() {
@@ -25,12 +25,12 @@ export default async function OrganizationSpecialistsPage() {
     >
       <form
         action={inviteSpecialist}
-        className="mb-8 grid gap-4 rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800 sm:grid-cols-3"
+        className="mb-8 grid gap-4 rounded-xl border border-line bg-surface p-6 shadow-card sm:grid-cols-3"
       >
         <Input name="email" label="Email del especialista" type="email" required />
         <Input name="specialty" label="Especialidad" placeholder="Cardiología" />
         <div className="flex items-end">
-          <Button type="submit" className="w-full">Invitar especialista</Button>
+          <SubmitButton className="w-full">Invitar especialista</SubmitButton>
         </div>
       </form>
 
@@ -38,31 +38,33 @@ export default async function OrganizationSpecialistsPage() {
         {specialists.map((member) => (
           <div
             key={member.id}
-            className="flex flex-col gap-3 rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800 sm:flex-row sm:items-center sm:justify-between"
+            className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-5 shadow-card sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
-              <p className="font-medium">{member.specialist.fullName ?? member.specialist.email}</p>
-              <p className="text-sm text-gray-500">{member.specialty ?? 'Sin especialidad'}</p>
-              <p className="text-xs text-gray-400">Estado: {member.status}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="font-medium text-ink">{member.specialist.fullName ?? member.specialist.email}</p>
+                <StatusBadge status={member.status} />
+              </div>
+              <p className="mt-1 text-sm text-inkMuted">{member.specialty ?? 'Sin especialidad'}</p>
             </div>
             <div className="flex gap-2">
               {member.status !== 'ACTIVE' && (
                 <form action={activateSpecialist}>
                   <input type="hidden" name="specialistId" value={member.specialistId} />
-                  <Button type="submit" size="sm">Activar</Button>
+                  <SubmitButton size="sm">Activar</SubmitButton>
                 </form>
               )}
               {member.status !== 'REMOVED' && (
                 <form action={removeSpecialist}>
                   <input type="hidden" name="specialistId" value={member.specialistId} />
-                  <Button type="submit" variant="danger" size="sm">Remover</Button>
+                  <SubmitButton variant="danger" size="sm">Remover</SubmitButton>
                 </form>
               )}
             </div>
           </div>
         ))}
         {specialists.length === 0 && (
-          <p className="text-center text-gray-500">Aún no tienes especialistas en tu red.</p>
+          <EmptyState>Aún no tienes especialistas en tu red.</EmptyState>
         )}
       </div>
     </PlatformShell>

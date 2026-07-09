@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { requireRole } from '@/lib/auth/session';
 import { PlatformShell, StatCard } from '@/components/platform/platform-shell';
@@ -26,18 +27,20 @@ export default async function PatientDashboardPage() {
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        <a href="/patient/appointments" className="rounded-lg border border-blue-200 bg-blue-50 p-5 dark:border-blue-800 dark:bg-blue-900/20">
-          <h3 className="font-semibold text-blue-800 dark:text-blue-300">Solicitar hora</h3>
-          <p className="mt-1 text-sm text-blue-600 dark:text-blue-400">Agenda una cita de atención médica</p>
-        </a>
-        <a href="/patient/symptoms" className="rounded-lg border border-orange-200 bg-orange-50 p-5 dark:border-orange-800 dark:bg-orange-900/20">
-          <h3 className="font-semibold text-orange-800 dark:text-orange-300">Registrar síntomas</h3>
-          <p className="mt-1 text-sm text-orange-600 dark:text-orange-400">Reporta síntomas visuales o de urgencia</p>
-        </a>
-        <a href="/patient/history" className="rounded-lg border border-green-200 bg-green-50 p-5 dark:border-green-800 dark:bg-green-900/20">
-          <h3 className="font-semibold text-green-800 dark:text-green-300">Historial médico</h3>
-          <p className="mt-1 text-sm text-green-600 dark:text-green-400">Consulta tus atenciones previas</p>
-        </a>
+        {[
+          { href: '/patient/appointments', title: 'Solicitar hora', desc: 'Agenda una cita de atención médica' },
+          { href: '/patient/symptoms', title: 'Registrar síntomas', desc: 'Reporta síntomas visuales o de urgencia' },
+          { href: '/patient/history', title: 'Historial médico', desc: 'Consulta tus atenciones previas' },
+        ].map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="group rounded-xl border border-line bg-surface p-5 shadow-card transition duration-200 ease-out-quart hover:-translate-y-0.5 hover:border-brand/30"
+          >
+            <h3 className="font-medium text-ink group-hover:text-brand">{item.title}</h3>
+            <p className="mt-1 text-sm text-inkMuted">{item.desc}</p>
+          </Link>
+        ))}
       </div>
     </PlatformShell>
   );

@@ -10,22 +10,17 @@ interface AuthCardProps {
 
 export function AuthCard({ title, description, children, footer }: AuthCardProps) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
-      <div className="w-full max-w-md space-y-8">
-        <div>
-          <Link
-            href="/"
-            className="block text-center text-sm font-medium text-blue-600 hover:text-blue-500"
-          >
-            HealthCloud
-          </Link>
-          <h2 className="mt-4 text-center text-3xl font-bold tracking-tight">{title}</h2>
-          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            {description}
-          </p>
+    <div className="flex min-h-screen items-center justify-center bg-canvas grain px-4 py-12">
+      <div className="w-full max-w-md">
+        <Link href="/" className="block text-center font-display text-2xl text-ink">
+          HealthCloud
+        </Link>
+        <div className="mt-8 rounded-xl border border-line bg-surface p-8 shadow-card">
+          <h1 className="font-display text-2xl text-ink">{title}</h1>
+          <p className="mt-2 text-sm text-inkMuted">{description}</p>
+          {children}
         </div>
-        {children}
-        {footer && <div className="text-center text-sm text-gray-600 dark:text-gray-400">{footer}</div>}
+        {footer && <div className="mt-6 text-center text-sm text-inkMuted">{footer}</div>}
       </div>
     </div>
   );

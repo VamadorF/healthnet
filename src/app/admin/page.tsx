@@ -25,13 +25,20 @@ export default async function AdminDashboardPage() {
         <StatCard label="Reportes generados" value={reports.length} />
       </div>
 
-      <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="text-lg font-semibold">Responsabilidades del Administrador</h2>
-        <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-600 dark:text-gray-400">
-          <li>Invitar o bloquear organizaciones médicas</li>
-          <li>Visualizar reportes generales de uso de la plataforma</li>
-          <li>Gestionar invitaciones institucionales</li>
-          <li>Supervisar el estado operativo del ecosistema</li>
+      <div className="mt-8 rounded-xl border border-line bg-surface p-6 shadow-card">
+        <h2 className="text-lg font-medium text-ink">Responsabilidades del Administrador</h2>
+        <ul className="mt-4 space-y-2 text-sm text-inkMuted">
+          {[
+            'Invitar o bloquear organizaciones médicas',
+            'Visualizar reportes generales de uso de la plataforma',
+            'Gestionar invitaciones institucionales',
+            'Supervisar el estado operativo del ecosistema',
+          ].map((item) => (
+            <li key={item} className="flex items-center gap-2.5">
+              <span className="h-1 w-1 shrink-0 rounded-full bg-brand" />
+              {item}
+            </li>
+          ))}
         </ul>
       </div>
     </PlatformShell>

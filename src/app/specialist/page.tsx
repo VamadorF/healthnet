@@ -1,9 +1,9 @@
 import { prisma } from '@/lib/prisma';
 import { requireRole } from '@/lib/auth/session';
-import { PlatformShell, StatCard } from '@/components/platform/platform-shell';
+import { PlatformShell, StatCard, StatusBadge, EmptyState } from '@/components/platform/platform-shell';
 import { formatDateTime } from '@/utils/format';
 import { confirmAppointment } from '@/app/specialist/actions';
-import { Button } from '@/components/ui/button';
+import { SubmitButton } from '@/components/ui/submit-button';
 
 export default async function SpecialistDashboardPage() {
   const user = await requireRole('SPECIALIST');
@@ -38,24 +38,26 @@ export default async function SpecialistDashboardPage() {
         {appointments.map((appt) => (
           <div
             key={appt.id}
-            className="flex flex-col gap-3 rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800 sm:flex-row sm:items-center sm:justify-between"
+            className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-5 shadow-card sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
-              <p className="font-medium">{appt.patient.fullName ?? appt.patient.email}</p>
-              <p className="text-sm text-gray-500">{formatDateTime(appt.scheduledAt)}</p>
-              <p className="text-sm text-gray-400">{appt.reason}</p>
-              <span className="mt-1 inline-block text-xs text-blue-600">{appt.status}</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="font-medium text-ink">{appt.patient.fullName ?? appt.patient.email}</p>
+                <StatusBadge status={appt.status} />
+              </div>
+              <p className="mt-1 text-sm text-inkMuted">{formatDateTime(appt.scheduledAt)}</p>
+              <p className="text-sm text-inkMuted">{appt.reason}</p>
             </div>
             {appt.status === 'REQUESTED' && (
               <form action={confirmAppointment}>
                 <input type="hidden" name="appointmentId" value={appt.id} />
-                <Button type="submit" size="sm">Confirmar</Button>
+                <SubmitButton size="sm">Confirmar</SubmitButton>
               </form>
             )}
           </div>
         ))}
         {appointments.length === 0 && (
-          <p className="text-center text-gray-500">No tienes citas programadas.</p>
+          <EmptyState>No tienes citas programadas.</EmptyState>
         )}
       </div>
     </PlatformShell>

@@ -30,9 +30,9 @@ export default async function OrganizationDashboardPage() {
         />
       </div>
 
-      <div className="mt-8 rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="text-lg font-semibold">{organization?.name ?? 'Organización pendiente'}</h2>
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+      <div className="mt-8 rounded-xl border border-line bg-surface p-6 shadow-card">
+        <h2 className="text-lg font-medium text-ink">{organization?.name ?? 'Organización pendiente'}</h2>
+        <p className="mt-2 text-sm text-inkMuted">
           {organization?.description ?? 'Completa tu perfil corporativo para activar tu red médica.'}
         </p>
       </div>

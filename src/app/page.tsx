@@ -84,46 +84,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Roles quick access */}
-      <section id="roles" className="border-t border-line bg-surface py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="font-display text-3xl text-ink">Cuatro interfaces, un solo sistema</h2>
-          <p className="mt-3 max-w-2xl text-inkMuted">
-            Cada rol tiene su propio espacio de trabajo. Navega entre ellos para ver
-            cómo se organiza la información en la arquitectura real del producto.
-          </p>
+      {/* Roles quick access — franja inmediata al hero */}
+      <section id="roles" className="mx-auto max-w-6xl px-6 pb-20">
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <h2 className="font-display text-3xl text-ink">Cuatro interfaces, un solo sistema</h2>
+            <p className="mt-3 max-w-2xl text-inkMuted">
+              Cada rol tiene su propio espacio de trabajo. Entra a cualquiera para verlo.
+            </p>
+          </div>
+        </div>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2">
-            {[
-              { href: '/demo/admin', title: 'Administrador', sub: '24 organizaciones · reportes globales', color: 'bg-role-admin' },
-              { href: '/demo/organization', title: 'Organización', sub: 'Clínica Andes Norte · 18 especialistas', color: 'bg-role-org' },
-              { href: '/demo/specialist', title: 'Especialista', sub: '4 citas hoy · 3 consultas pendientes', color: 'bg-role-spec' },
-              { href: '/demo/patient', title: 'Paciente', sub: 'Próxima cita hoy 09:00', color: 'bg-role-patient' },
-            ].map((card) => (
-              <Link
-                key={card.href}
-                href={card.href}
-                className="group flex items-center gap-5 rounded-xl border border-line bg-canvas p-6 transition duration-200 ease-out-quart hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-card"
-              >
-                <div className={`h-12 w-1.5 rounded-full ${card.color}`} />
-                <div className="flex-1">
-                  <h3 className="font-medium text-ink transition duration-200 ease-out-soft group-hover:text-brand">{card.title}</h3>
-                  <p className="mt-1 text-sm text-inkMuted">{card.sub}</p>
-                </div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { href: '/demo/admin', title: 'Administrador', sub: '24 organizaciones · reportes globales', color: 'bg-role-admin' },
+            { href: '/demo/organization', title: 'Organización', sub: 'Clínica Andes Norte · 18 especialistas', color: 'bg-role-org' },
+            { href: '/demo/specialist', title: 'Especialista', sub: '4 citas hoy · 3 consultas pendientes', color: 'bg-role-spec' },
+            { href: '/demo/patient', title: 'Paciente', sub: 'Próxima cita hoy 09:00', color: 'bg-role-patient' },
+          ].map((card) => (
+            <Link
+              key={card.href}
+              href={card.href}
+              className="group flex flex-col rounded-xl border border-line bg-surface p-5 shadow-card transition duration-200 ease-out-quart hover:-translate-y-0.5 hover:border-brand/30"
+            >
+              <div className="flex items-center justify-between">
+                <div className={`h-1.5 w-8 rounded-full ${card.color}`} />
                 <span
                   aria-hidden="true"
                   className="text-inkMuted/50 transition duration-200 ease-out-quart group-hover:translate-x-0.5 group-hover:text-brand"
                 >
                   →
                 </span>
-              </Link>
-            ))}
-          </div>
+              </div>
+              <h3 className="mt-4 font-medium text-ink transition duration-200 ease-out-soft group-hover:text-brand">
+                {card.title}
+              </h3>
+              <p className="mt-1 text-sm text-inkMuted">{card.sub}</p>
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* Architecture */}
-      <section id="arquitectura" className="py-20">
+      {/* Architecture — banda con fondo */}
+      <section id="arquitectura" className="border-y border-line bg-surface py-20">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="font-display text-3xl text-ink">Dónde vive cada cosa</h2>
           <p className="mt-3 max-w-2xl text-inkMuted">

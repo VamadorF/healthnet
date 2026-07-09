@@ -100,7 +100,7 @@ export function LoginForm() {
           <div className="w-full border-t border-line" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="bg-surface px-2 text-inkMuted">O continuar con</span>
+          <span className="bg-canvas px-2 text-inkMuted">O continuar con</span>
         </div>
       </div>
 

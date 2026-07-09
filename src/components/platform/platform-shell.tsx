@@ -1,54 +1,22 @@
 import Link from 'next/link';
 import { User, UserRole } from '@prisma/client';
 import { getRoleLabel, getRoleNav } from '@/lib/auth/navigation';
+import { SidebarNav, MobileNav } from '@/components/platform/sidebar-nav';
 
-interface PlatformNavProps {
-  user: User;
-}
+const ROLE_COLORS: Record<UserRole, string> = {
+  ADMIN: 'bg-role-admin',
+  ORGANIZATION: 'bg-role-org',
+  SPECIALIST: 'bg-role-spec',
+  PATIENT: 'bg-role-patient',
+};
 
-export function PlatformNav({ user }: PlatformNavProps) {
-  const navItems = getRoleNav(user.role);
-
-  return (
-    <header className="border-b border-line bg-surface/80 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <Link href={navItems[0]?.href ?? '/'} className="font-display text-xl text-ink">
-            HealthCloud
-          </Link>
-          <RoleBadge role={user.role} />
-          <nav className="flex flex-wrap gap-4 text-sm">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-inkMuted transition duration-200 ease-out-soft hover:text-ink"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-        <div className="flex items-center gap-4 text-sm">
-          <span className="text-inkMuted">{user.fullName ?? user.email}</span>
-          <Link
-            href="/profile"
-            className="text-inkMuted transition duration-200 ease-out-soft hover:text-ink"
-          >
-            Cuenta
-          </Link>
-          <form action="/auth/signout" method="post">
-            <button
-              type="submit"
-              className="rounded-full border border-line bg-surface px-4 py-1.5 text-sm font-medium text-inkMuted transition duration-200 ease-out-soft hover:border-accent/40 hover:text-accent-dark"
-            >
-              Salir
-            </button>
-          </form>
-        </div>
-      </div>
-    </header>
-  );
+function getInitials(user: User) {
+  const source = user.fullName?.trim() || user.email;
+  return source
+    .split(/[\s@]+/)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('');
 }
 
 interface PlatformShellProps {
@@ -59,19 +27,87 @@ interface PlatformShellProps {
 }
 
 export function PlatformShell({ user, title, description, children }: PlatformShellProps) {
+  const nav = getRoleNav(user.role);
+  const roleColor = ROLE_COLORS[user.role];
+
   return (
     <div className="min-h-screen bg-canvas grain">
-      <PlatformNav user={user} />
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <p className="text-xs font-medium uppercase tracking-wider text-inkMuted">
-            {getRoleLabel(user.role)}
-          </p>
-          <h1 className="mt-1 font-display text-3xl text-ink">{title}</h1>
-          {description && <p className="mt-2 max-w-2xl text-inkMuted">{description}</p>}
+      <div className="flex min-h-screen">
+        {/* Sidebar por rol (misma estructura que las vistas demo) */}
+        <aside className={`hidden w-64 flex-shrink-0 flex-col ${roleColor} text-white lg:flex`}>
+          <div className="border-b border-white/10 px-5 py-6">
+            <Link href="/" className="font-display text-xl tracking-tight text-white">
+              HealthCloud
+            </Link>
+            <p className="mt-3 text-xs uppercase tracking-widest text-white/50">
+              {getRoleLabel(user.role)}
+            </p>
+          </div>
+
+          <SidebarNav items={nav} />
+
+          <div className="border-t border-white/10 p-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20 text-xs font-semibold">
+                {getInitials(user)}
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-medium">{user.fullName ?? user.email}</p>
+                <p className="truncate text-xs text-white/60">{user.email}</p>
+              </div>
+            </div>
+            <div className="mt-4 flex items-center justify-between text-xs">
+              <Link
+                href="/profile"
+                className="text-white/60 transition duration-200 ease-out-soft hover:text-white"
+              >
+                Mi cuenta
+              </Link>
+              <form action="/auth/signout" method="post">
+                <button
+                  type="submit"
+                  className="text-white/60 transition duration-200 ease-out-soft hover:text-white"
+                >
+                  Cerrar sesión
+                </button>
+              </form>
+            </div>
+          </div>
+        </aside>
+
+        {/* Área de contenido */}
+        <div className="flex min-w-0 flex-1 flex-col">
+          {/* Barra superior solo en móvil */}
+          <div className={`flex flex-col gap-3 px-4 py-3 text-white lg:hidden ${roleColor}`}>
+            <div className="flex items-center justify-between">
+              <Link href="/" className="font-display text-lg text-white">
+                HealthCloud
+              </Link>
+              <div className="flex items-center gap-4 text-xs">
+                <Link href="/profile" className="text-white/75 hover:text-white">
+                  Mi cuenta
+                </Link>
+                <form action="/auth/signout" method="post">
+                  <button type="submit" className="text-white/75 hover:text-white">
+                    Cerrar sesión
+                  </button>
+                </form>
+              </div>
+            </div>
+            <MobileNav items={nav} />
+          </div>
+
+          <header className="border-b border-line bg-surface/80 px-6 py-5 backdrop-blur-sm lg:px-10">
+            <p className="text-xs font-medium uppercase tracking-wider text-inkMuted">
+              {getRoleLabel(user.role)}
+            </p>
+            <h1 className="mt-1 font-display text-2xl text-ink md:text-3xl">{title}</h1>
+            {description && <p className="mt-1 max-w-2xl text-sm text-inkMuted">{description}</p>}
+          </header>
+
+          <main className="flex-1 px-6 py-8 lg:px-10">{children}</main>
         </div>
-        {children}
-      </main>
+      </div>
     </div>
   );
 }
@@ -87,6 +123,26 @@ export function Card({
     <div className={`rounded-xl border border-line bg-surface shadow-card ${className}`}>
       {children}
     </div>
+  );
+}
+
+export function Panel({
+  title,
+  action,
+  children,
+}: {
+  title: string;
+  action?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="rounded-xl border border-line bg-surface shadow-card">
+      <div className="flex items-center justify-between border-b border-line px-6 py-4">
+        <h2 className="font-medium text-ink">{title}</h2>
+        {action}
+      </div>
+      <div className="p-6">{children}</div>
+    </section>
   );
 }
 

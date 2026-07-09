@@ -20,13 +20,9 @@ export default async function PatientDashboardPage() {
       title="Panel del Paciente"
       description="Solicita atención, registra síntomas y consulta tu historial médico"
     >
-      <div className="grid gap-4 sm:grid-cols-3">
-        <StatCard label="Citas solicitadas" value={appointments} />
-        <StatCard label="Reportes de síntomas" value={symptomReports} />
-        <StatCard label="Consultas completadas" value={consultations} />
-      </div>
-
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
+      {/* Acciones primero: es lo que el paciente viene a hacer */}
+      <h2 className="text-lg font-medium text-ink">¿Qué necesitas hacer hoy?</h2>
+      <div className="mt-4 grid gap-4 sm:grid-cols-3">
         {[
           { href: '/patient/appointments', title: 'Solicitar hora', desc: 'Agenda una cita de atención médica' },
           { href: '/patient/symptoms', title: 'Registrar síntomas', desc: 'Reporta síntomas visuales o de urgencia' },
@@ -35,12 +31,28 @@ export default async function PatientDashboardPage() {
           <Link
             key={item.href}
             href={item.href}
-            className="group rounded-xl border border-line bg-surface p-5 shadow-card transition duration-200 ease-out-quart hover:-translate-y-0.5 hover:border-brand/30"
+            className="group flex flex-col justify-between gap-4 rounded-xl border border-line bg-surface p-5 shadow-card transition duration-200 ease-out-quart hover:-translate-y-0.5 hover:border-brand/30"
           >
-            <h3 className="font-medium text-ink group-hover:text-brand">{item.title}</h3>
-            <p className="mt-1 text-sm text-inkMuted">{item.desc}</p>
+            <div>
+              <h3 className="font-medium text-ink group-hover:text-brand">{item.title}</h3>
+              <p className="mt-1 text-sm text-inkMuted">{item.desc}</p>
+            </div>
+            <span
+              aria-hidden="true"
+              className="text-inkMuted/50 transition duration-200 ease-out-quart group-hover:translate-x-0.5 group-hover:text-brand"
+            >
+              →
+            </span>
           </Link>
         ))}
+      </div>
+
+      {/* Resumen de actividad, secundario */}
+      <h2 className="mt-10 text-lg font-medium text-ink">Tu actividad</h2>
+      <div className="mt-4 grid gap-4 sm:grid-cols-3">
+        <StatCard label="Citas solicitadas" value={appointments} />
+        <StatCard label="Reportes de síntomas" value={symptomReports} />
+        <StatCard label="Consultas completadas" value={consultations} />
       </div>
     </PlatformShell>
   );

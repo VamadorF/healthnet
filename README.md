@@ -1,4 +1,4 @@
-# HealthNet
+# HealthCloud
 
 Aplicación web completa construida con Next.js 15, TypeScript, Supabase, Sentry y Resend.
 
@@ -29,7 +29,7 @@ Aplicación web completa construida con Next.js 15, TypeScript, Supabase, Sentry
 
 ```bash
 git clone <url-del-repo>
-cd healthnet
+cd healthcloud
 ```
 
 ### 2. Instalar dependencias
@@ -115,7 +115,7 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 ## 📁 Estructura del Proyecto
 
 ```
-healthnet/
+healthcloud/
 ├── src/
 │   ├── app/                    # App Router de Next.js
 │   │   ├── auth/              # Rutas de autenticación

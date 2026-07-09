@@ -1,6 +1,6 @@
 # Configuración de Supabase local (opcional para desarrollo)
 
-project_id = "healthnet"
+project_id = "healthcloud"
 
 [api]
 enabled = true

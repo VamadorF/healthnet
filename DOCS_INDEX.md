@@ -1,4 +1,4 @@
-# 📚 Índice de Documentación - HealthNet
+# 📚 Índice de Documentación - HealthCloud
 
 Esta es la guía de navegación para toda la documentación del proyecto.
 

@@ -6,7 +6,7 @@ export default function SignupPage() {
   return (
     <AuthCard
       title="Crear cuenta"
-      description="Regístrate para acceder a HealthNet"
+      description="Regístrate para acceder a HealthCloud"
       footer={
         <p>
           ¿Ya tienes cuenta?{' '}

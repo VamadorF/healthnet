@@ -156,6 +156,9 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
+### Cambiado
+- Renombrar la aplicación de HealthNet a **HealthCloud** en toda la UI, emails, documentación y configuración
+
 ### Añadido
 - Página de registro (`/signup`) con validación Zod
 - Recuperación de contraseña (`/forgot-password`)
@@ -171,10 +174,6 @@ y este proyecto se adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ### Por Hacer
 - [ ] Agregar tests unitarios (Jest/Vitest)
 - [ ] Agregar tests E2E (Playwright)
-- [ ] Implementar página de registro
-- [ ] Agregar recuperación de contraseña
-- [ ] Implementar perfil de usuario editable
-- [ ] Agregar upload de avatar
 - [ ] Crear más templates de email
 - [ ] Agregar internacionalización (i18n)
 - [ ] Implementar notificaciones en tiempo real

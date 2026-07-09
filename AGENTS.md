@@ -1,10 +1,10 @@
-# Agentes de IA - HealthNet
+# Agentes de IA - HealthCloud
 
 Este archivo proporciona contexto para los agentes de IA que trabajen en este proyecto.
 
 ## Contexto del Proyecto
 
-HealthNet es una aplicación web completa construida con tecnologías modernas para gestión de salud.
+HealthCloud es una aplicación web completa construida con tecnologías modernas para gestión de salud.
 
 ## Stack Tecnológico
 

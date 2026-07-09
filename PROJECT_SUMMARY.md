@@ -1,4 +1,4 @@
-# 📊 Resumen del Proyecto HealthNet
+# 📊 Resumen del Proyecto HealthCloud
 
 ## 🎯 Objetivo
 Aplicación web completa de gestión de salud construida con tecnologías modernas y escalables.
@@ -55,7 +55,7 @@ Aplicación web completa de gestión de salud construida con tecnologías modern
 ## 📁 Estructura del Proyecto
 
 ```
-healthnet/
+healthcloud/
 ├── 📄 Configuración Base
 │   ├── package.json           # Dependencias
 │   ├── tsconfig.json          # TypeScript
